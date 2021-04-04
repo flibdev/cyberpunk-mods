@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "*.reds": "swift",
+        "*.redscript": "swift",
+        "*.script": "swift",
+        "*.ws": "swift"
+    },
+    "[swift]": {
+        "editor.largeFileOptimizations": false,
+        "editor.tabSize": 2
+    }    
+}
