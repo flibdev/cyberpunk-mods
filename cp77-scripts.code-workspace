@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.reds": "swift",
+			"*.redscript": "swift",
+			"*.script": "swift",
+			"*.ws": "swift"
+		},
+		"[swift]": {
+			"editor.largeFileOptimizations": false,
+			"editor.tabSize": 2
+		},
+		"redscript.compilerPath": "D:\\GitHub\\flibx0r\\redscript\\target\\release\\redscript-cli.exe"
+	}
+}
