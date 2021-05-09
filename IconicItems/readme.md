@@ -28,5 +28,5 @@ The zip files are set up to be installed automagically with Vortex or other mod 
 
 
 ## Credits
-- jekky for the redscript compiler
-- The CP77 modding discord
+- jekky for the [redscript compiler](https://github.com/jac3km4/redscript)
+- The [CP77 modding discord](https://discord.gg/Epkq79kd96)
