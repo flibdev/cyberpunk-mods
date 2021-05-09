@@ -1,6 +1,0 @@
-Sort menus
-Vendor display
-Limit ammo crafting
-Show scope type
-Search shards
-HMG Mods
