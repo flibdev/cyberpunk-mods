@@ -26,6 +26,16 @@ The zip files are set up to be installed automagically with Vortex or other mod 
 - Extract the .zip file of your preferred variant to the Cyberpunk game folder so that the script file ends up in the \r6\scripts folder:<br />
   `Cyberpunk2077\r6\scripts\IconicItems-{variant}.reds`
 
+## IMPORTANT: Redscript v0.2.0 onwards:
+
+The `IconicItems-ShowWarningDialog` variant has been updated to work with the string escape characters added in redscript v0.2.0, but you will need to edit the exclusions configuration to reenable the script. After installing the latest version of redscript and this mod, edit the configuration file located here:<br />
+`Cyberpunk 2077/r6/scripts/redscript.toml`
+
+and remove the line that says:
+```toml
+  "IconicItems-ShowWarningDialog",
+```
+
 
 ## Credits
 - jekky for the [redscript compiler](https://github.com/jac3km4/redscript)

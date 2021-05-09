@@ -1,6 +1,6 @@
 # flib's UI Improvements
 
-A collection of quality of life UI improvements to fix minor issues that annoyed me.
+A collection of quality-of-life UI improvements to fix minor issues that annoyed me.
 
 ### Inventory
 
