@@ -1,0 +1,61 @@
+<!-- Created with FOMOD Creation Tool 1.7.0.37 [http://www.nexusmods.com/fallout4/mods/6821] --> 
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://qconsulting.ca/fo3/ModConfig5.0.xsd"> 
+	<moduleName>flib's UI Improvements</moduleName> 
+	<requiredInstallFiles> 
+		<file source="r6\scripts\flib\_common\sort.reds" destination="r6\scripts\flib\_common\sort.reds" /> 
+		<file source="r6\scripts\flib\JournalManager.GetContactDataArray.reds" destination="scripts\flib\JournalManager.GetContactDataArray.reds" /> 
+		<file source="r6\scripts\flib\MessengerUtils.GetContactDataArray.reds" destination="scripts\flib\MessengerUtils.GetContactDataArray.reds" /> 
+	</requiredInstallFiles> 
+	<installSteps order="Explicit"> 
+		<installStep name="Choose what to install"> 
+			<optionalFileGroups order="Explicit"> 
+				<group name="Improvements" type="SelectAny"> 
+					<plugins order="Explicit"> 
+						<plugin name="Crafting-MaxAmmo"> 
+							<description>Limits ammo crafting to the maximum carryable per type</description> 
+							<files> 
+								<file source="r6\scripts\flib\Crafting-MaxAmmo.reds" destination="r6\scripts\flib\Crafting-MaxAmmo.reds" priority="0" /> 
+							</files> 
+							<typeDescriptor> 
+								<type name="Recommended"/> 
+							</typeDescriptor> 
+						</plugin> 
+						<plugin name="IconicItems-PreventRemoval"> 
+							<description>Prevents Iconic items from being disassembled or sold</description> 
+							<files> 
+								<file source="r6\scripts\flib\IconicItems-PreventRemoval.reds" destination="r6\scripts\flib\IconicItems-PreventRemoval.reds" priority="0" /> 
+							</files> 
+							<typeDescriptor> 
+								<type name="Recommended"/> 
+							</typeDescriptor> 
+						</plugin> 
+					</plugins> 
+				</group> 
+				<group name="Dialer Menu" type="SelectAtMostOne"> 
+					<plugins order="Explicit"> 
+						<plugin name="By Name"> 
+							<description>Sorts the dialer menu by Most Recent Message</description> 
+							<image path="images\DialerMenu\ByName.jpg" /> 
+							<files> 
+								<file source="r6\scripts\flib\DailerMenu-ByName.reds" destination="r6\scripts\flib\DailerMenu-ByName.reds" priority="0" /> 
+							</files> 
+							<typeDescriptor> 
+								<type name="Recommended"/> 
+							</typeDescriptor> 
+						</plugin> 
+						<plugin name="By Timestamp"> 
+							<description>Sorts the dialer menu by Most Recent Message</description> 
+							<image path="images\DialerMenu\ByTimestamp.jpg" /> 
+							<files> 
+								<file source="r6\scripts\flib\DailerMenu-ByTimestamp.reds" destination="r6\scripts\flib\DailerMenu-ByTimestamp.reds" priority="0" /> 
+							</files> 
+							<typeDescriptor> 
+								<type name="Optional"/> 
+							</typeDescriptor> 
+						</plugin> 
+					</plugins> 
+				</group> 
+			</optionalFileGroups> 
+		</installStep> 
+	</installSteps> 
+</config>

@@ -1,9 +1,10 @@
-<fomod>
-    <Name>flib's UI Improvements</Name>
-    <Author>flib</Author>
-    <Version MachineVersion="1.0.0">1.0.0</Version>
-    <Description>
-        Quality of life UI Improvements
-    </Description>
-    <Website>https://www.nexusmods.com/cyberpunk2077/mods/xxxx</Website>
-</fomod>
+<fomod> 
+	<Name>flib's UI Improvements</Name> 
+	<Author>flib</Author> 
+	<Version>1.0.0</Version> 
+	<Website>https://www.nexusmods.com/cyberpunk2077/mods/xxxx</Website> 
+	<Description>A collection of quality-of-life UI improvements to fix minor issues that annoyed me.</Description> 
+	<Groups>
+		<element>User Interface</element>
+	</Groups> 
+</fomod> 
