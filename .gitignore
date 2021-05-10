@@ -1,7 +1,7 @@
 .cp77-decompiled/
 .references/
-
-*.psd
-
 */.working/
 */build/
+
+*.psd
+*.code-workspace
