@@ -1,0 +1,4 @@
+fomod\
+images\
+r6\
+readme.txt

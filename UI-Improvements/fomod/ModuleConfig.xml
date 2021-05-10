@@ -33,9 +33,12 @@
 				</group> 
 				<group name="Dialer Menu" type="SelectAtMostOne"> 
 					<plugins order="Explicit"> 
-						<plugin name="By Name"> 
-							<description>Sorts the dialer menu by Most Recent Message</description> 
-							<image path="images\DialerMenu\ByName.jpg" /> 
+						<plugin name="By Name (recommended)"> 
+							<description>Sorts the dialer menu by:
+1. Quest Related
+2. Unread Messages
+3. Contact Name Alphabetically</description> 
+							<image path="images\DialerMenu\ByName-FOMOD.jpg" /> 
 							<files> 
 								<file source="r6\scripts\flib\DailerMenu-ByName.reds" destination="r6\scripts\flib\DailerMenu-ByName.reds" priority="0" /> 
 							</files> 
@@ -44,8 +47,11 @@
 							</typeDescriptor> 
 						</plugin> 
 						<plugin name="By Timestamp"> 
-							<description>Sorts the dialer menu by Most Recent Message</description> 
-							<image path="images\DialerMenu\ByTimestamp.jpg" /> 
+							<description>Sorts the dialer menu:
+1. Quest Related
+2. Unread Messages
+3. Most Recent Message</description> 
+							<image path="images\DialerMenu\ByTimestamp-FOMOD.jpg" /> 
 							<files> 
 								<file source="r6\scripts\flib\DailerMenu-ByTimestamp.reds" destination="r6\scripts\flib\DailerMenu-ByTimestamp.reds" priority="0" /> 
 							</files> 
