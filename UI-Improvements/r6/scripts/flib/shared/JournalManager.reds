@@ -1,4 +1,4 @@
-
+// Added logic to fill the ContactData.timeStamp field
 @replaceMethod(JournalManager)
 public final func GetContactDataArray(includeUnknown: Bool) -> array<ref<IScriptable>> {
   let contactData: ref<ContactData>;
@@ -19,10 +19,12 @@ public final func GetContactDataArray(includeUnknown: Bool) -> array<ref<IScript
   let trackedChildEntriesList: array<wref<JournalEntry>>;
   let trackedChildEntry: wref<JournalQuestCodexLink>;
   let trackedObjective: ref<JournalQuestObjective>;
+
   context.stateFilter.active = true;
   this.GetContacts(context, entries);
   trackedChildEntriesCount = 0;
   trackedObjective = this.GetTrackedEntry() as JournalQuestObjective;
+
   if trackedObjective != null {
     this.GetChildren(trackedObjective, context.stateFilter, trackedChildEntriesList);
     trackedChildEntriesCount = ArraySize(trackedChildEntriesList);
@@ -35,6 +37,7 @@ public final func GetContactDataArray(includeUnknown: Bool) -> array<ref<IScript
       j = j + 1;
     };
   };
+
   i = 0;
   while i < ArraySize(entries) {
     contactEntry = entries[i] as JournalContact;
@@ -46,17 +49,22 @@ public final func GetContactDataArray(includeUnknown: Bool) -> array<ref<IScript
         contactData.localizedName = contactEntry.GetLocalizedName(this);
         contactData.avatarID = contactEntry.GetAvatarID(this);
         contactData.questRelated = ArrayContains(trackedChildEntriesHashList, contactData.hash);
+        contactData.parent = null;
+
         ArrayClear(messagesReceived);
         ArrayClear(playerReplies);
         this.GetFlattenedMessagesAndChoices(contactEntry, messagesReceived, playerReplies);
+
         j = 0;
         while j < ArraySize(messagesReceived) {
           if !this.IsEntryVisited(messagesReceived[j]) {
             ArrayPush(contactData.unreadMessages, this.GetEntryHash(messagesReceived[j]));
-          };
+          }
           j += 1;
-        };
+        }
+        contactData.unreadMessegeCount = ArraySize(contactData.unreadMessages);
         contactData.playerCanReply = ArraySize(playerReplies) > 0;
+
         if ArraySize(messagesReceived) > 0 {
           contactData.hasMessages = true;
           lastMessegeRecived = ArrayLast(messagesReceived) as JournalPhoneMessage;
@@ -69,16 +77,20 @@ public final func GetContactDataArray(includeUnknown: Bool) -> array<ref<IScript
             contactData.lastMesssagePreview = lastMessegeSent.GetText();
             contactData.playerIsLastSender = true;
             contactData.timeStamp = this.GetEntryTimestamp(lastMessegeSent);
-          };
+          }
         } else {
+          // What even is localization?
           contactData.lastMesssagePreview = "You are now connected.";
-        };
+        }
         ArrayPush(contactDataArray, contactData);
-      };
+      }
     } else {
+      // Why?
       ArrayPush(contactDataArray, emptyContactData);
-    };
+    }
+
     i += 1;
-  };
+  }
+
   return contactDataArray;
 }

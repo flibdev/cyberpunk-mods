@@ -1,22 +1,39 @@
-
+/// Sorting Methods
 module flib._common.sort
 
-// Array wrapper needed to get around lack of generic arrays or array<variant> typecasting support
+/// Array wrapper needed to get around lack of generic arrays or array<variant> typecasting support
 public abstract class IArrayWrapper extends IScriptable {
+  /// Get the array size
+  /// @returns The size of the wrapped array
   public func Size() -> Int32 { return 0; }
+  /// Get the element at the specified index
+  /// @param index Array index
+  /// @returns The element at the index
   public func At(index: Int32) -> Variant { }
+  /// Swaps two elements in the array
+  /// @param leftIndex   Left element index to swap
+  /// @param rightIndex  Right element index to swap
   public func Swap(leftIndex: Int32, rightIndex: Int32) -> Void {}
 }
 
+/// Generic Comparator class to implement sorting order until we have closure/lambda support
 public abstract class IComparator extends IScriptable {
-  // Return true if left < right, otherwise false
+  /// Must return true if left < right (not <=), otherwise false
+  /// @param left   Left item to compare
+  /// @param right  Right item to compare
+  /// @returns      True if left < right (not <=), otherwise false
   public func Compare(left: Variant, right: Variant) -> Bool {
     return true;
   }
 }
 
+
 public class Quicksort extends IScriptable {
 
+  /// Sorts a wrapped array in-place based on the given comparator.
+  /// This implementation of Quicksort is non-stable (it doesn't maintain relative order of equal items)
+  /// @param wrap  The wrapped array to sort
+  /// @param comp  IComparator to use for sorting the array
   public static func SortArray(wrap: ref<IArrayWrapper>, comp: ref<IComparator>) -> Void {
     let arrSize = wrap.Size();
     if (arrSize > 1) {
@@ -24,6 +41,11 @@ public class Quicksort extends IScriptable {
     }
   }
 
+  /// Recursive quicksort method
+  /// @param wrap  The wrapped array
+  /// @param comp  IComparator to use for sorting the array
+  /// @param lo    Partition lower index
+  /// @param hi    Partition upper index
   private static func Quicksort(wrap: ref<IArrayWrapper>, comp: ref<IComparator>, lo: Int32, hi: Int32) -> Void {
     let pivot: Int32;
 
@@ -35,6 +57,12 @@ public class Quicksort extends IScriptable {
     }
   }
 
+  /// Implementation of the Hoare partition scheme, using a lazy rounded-down midpoint pivot
+  /// @param wrap  The wrapped array
+  /// @param comp  IComparator to use for sorting the array
+  /// @param lo    Partition lower index
+  /// @param hi    Partition upper index
+  /// @returns     The new partition index to continue spliting from
   private static func Partition(wrap: ref<IArrayWrapper>, comp: ref<IComparator>, lo: Int32, hi: Int32) -> Int32 {
     let i = lo;
     let j = hi;
@@ -94,7 +122,7 @@ public class Int32Comparator extends IComparator {
   public static func Make() -> ref<IComparator> {
     return new Int32Comparator();
   }
-  // Return true if left < right, otherwise false
+
   public func Compare(left: Variant, right: Variant) -> Bool {
     let leftData: Int32 = FromVariant(left);
     let rightData: Int32 = FromVariant(right);
