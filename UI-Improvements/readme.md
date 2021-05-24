@@ -43,18 +43,58 @@ A collection of quality-of-life UI improvements to fix minor issues that annoyed
 
 ## For redscript devs
 ```swift
-// class CraftingSystem
-// addMethods
-protected func GetAmmoCraftingMaximum(itemRecord: wref<Item_Record>) -> Int32
-protected func GetAmmoCraftingMaximum(itemData: wref<gameItemData>) -> Int32
-// replaceMethods
-public final const func GetMaxCraftingAmount(itemData: wref<gameItemData>) -> Int32
-public final const func CanItemBeCrafted(itemData: wref<gameItemData>) -> Bool
-public final const func CanItemBeCrafted(itemRecord: wref<Item_Record>) -> Bool
+class ContactData {
+  // Added Field
+  public let parent: wref<ContactData>;
+}
 
-// class DialerContactDataView
-// replaceMethod
-public func SortItem(left: ref<IScriptable>, right: ref<IScriptable>) -> Bool
+class CraftingSystem {
+  // Added Methods
+  protected func GetAmmoCraftingMaximum(itemRecord: wref<Item_Record>) -> Int32
+  protected func GetAmmoCraftingMaximum(itemData: wref<gameItemData>) -> Int32
+  // Replaced Methods
+  public final const func GetMaxCraftingAmount(itemData: wref<gameItemData>) -> Int32
+  public final const func CanItemBeCrafted(itemData: wref<gameItemData>) -> Bool
+  public final const func CanItemBeCrafted(itemRecord: wref<Item_Record>) -> Bool
+  public final const func CanItemBeDisassembled(itemData: wref<gameItemData>) -> Bool
+}
+
+class DialerContactDataView {
+  // Replaced Method
+  public func SortItem(left: ref<IScriptable>, right: ref<IScriptable>) -> Bool
+}
+
+class JournalManager {
+  // Replaced Method
+  public final func GetContactDataArray(includeUnknown: Bool) -> array<ref<IScriptable>>
+}
+
+class MessengerContactDataView {
+  // Added Method
+  protected func PreSortItems(compareBuilder: ref<CompareBuilder>, left: ref<VirutalNestedListData>, right: ref<VirutalNestedListData>) -> Void {
+  // Replaced Method
+  protected func SortItems(compareBuilder: ref<CompareBuilder>, left: ref<VirutalNestedListData>, right: ref<VirutalNestedListData>) -> Void
+}
+
+class MessengerUtils {
+  // Replaced Method
+  public final static func GetContactDataArray(journal: ref<JournalManager>, includeUnknown: Bool, skipEmpty: Bool, activeDataSync: wref<MessengerContactSyncData>) -> array<ref<VirutalNestedListData>>
+}
+
+class RipperDocGameController {
+  // Replaced Method
+  private final func GetAmountOfAvailableItems(equipArea: gamedataEquipmentArea) -> Int32
+}
+
+class ShardsNestedListDataView {
+  // Replaced Method
+  protected func SortItems(compareBuilder: ref<CompareBuilder>, left: ref<VirutalNestedListData>, right: ref<VirutalNestedListData>) -> Void
+}
+
+class Vendor {
+  // Replaced Method
+  public final const func PlayerCanSell(itemID: ItemID, allowQuestItems: Bool, excludeEquipped: Bool) -> Bool
+}
 
 // Still filling this out
 ```
