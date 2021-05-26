@@ -13,9 +13,11 @@ My collection of quality-of-life UI improvements
 ## Stuff I want to look in to
 
 - [ ] Fixing HMG weapon mods
+- [ ] Steal the AR driving directions from Panam's questline and add them to regular driving nav
+- [ ] Extract fonts used in-game and generate a list of supported glyphs
 - [ ] Add redscript support for casting `array<ref<*>>` to `array<Variant>`
 - [ ] Add redscript support for closures
-- [ ] Steal the AR driving directions from Panam's questline and add them to regular driving nav
+
 
 ## Credits
 - jekky for the [redscript compiler](https://github.com/jac3km4/redscript)

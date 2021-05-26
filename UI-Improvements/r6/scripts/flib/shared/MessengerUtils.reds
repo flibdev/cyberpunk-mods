@@ -1,4 +1,4 @@
-// Added logic to fill the ContactData.timeStamp field
+// Added logic to fill the ContactData.timeStamp field with the latest message timestamp
 @replaceMethod(MessengerUtils)
 public final static func GetContactDataArray(journal: ref<JournalManager>, includeUnknown: Bool, skipEmpty: Bool, activeDataSync: wref<MessengerContactSyncData>) -> array<ref<VirutalNestedListData>> {
   let contactData: ref<ContactData>;
@@ -16,6 +16,7 @@ public final static func GetContactDataArray(journal: ref<JournalManager>, inclu
   let threadData: ref<ContactData>;
   let threadVirtualListData: ref<VirutalNestedListData>;
   let virtualDataList: array<ref<VirutalNestedListData>>;
+  let lastTimestamp: GameTime;
   context.stateFilter.active = true;
   journal.GetContacts(context, entries);
   i = 0;
@@ -33,6 +34,7 @@ public final static func GetContactDataArray(journal: ref<JournalManager>, inclu
         contactData.hash = journal.GetEntryHash(contactEntry);
         contactData.localizedName = contactEntry.GetLocalizedName(journal);
         contactData.avatarID = contactEntry.GetAvatarID(journal);
+        // This timestamp appears to be when you first met the contact
         contactData.timeStamp = journal.GetEntryTimestamp(contactEntry);
         contactData.activeDataSync = activeDataSync;
         contactData.parent = null;
@@ -55,6 +57,7 @@ public final static func GetContactDataArray(journal: ref<JournalManager>, inclu
             threadData.id = conversationEntry.GetId();
             threadData.hash = journal.GetEntryHash(conversationEntry);
             threadData.localizedName = conversationEntry.GetTitle();
+            // This timestamp appears to be when you first started the conversation
             threadData.timeStamp = journal.GetEntryTimestamp(conversationEntry);
             threadData.activeDataSync = activeDataSync;
             threadData.parent = contactData;
@@ -65,10 +68,15 @@ public final static func GetContactDataArray(journal: ref<JournalManager>, inclu
             threadVirtualListData.m_level = contactData.hash;
             threadVirtualListData.m_widgetType = 1u;
             threadVirtualListData.m_data = threadData;
-
-            if threadData.timeStamp > contactData.timeStamp  {
+            // Grab the timestamp from the most recent message
+            if ArraySize(messagesReceived) > 0 {
+              lastTimestamp = journal.GetEntryTimestamp(ArrayLast(messagesReceived));
+              if lastTimestamp > threadData.timeStamp {
+                threadData.timeStamp = lastTimestamp;
+              }
+            }
+            if threadData.timeStamp > contactData.timeStamp {
               contactData.timeStamp = threadData.timeStamp;
-              Log(GetLocalizedText(contactData.localizedName) + " -> threadData.timeStamp more recent = " + ToString(GameTime.GetSeconds(threadData.timeStamp)));
             }
 
             ArrayPush(virtualDataList, threadVirtualListData);
@@ -76,11 +84,29 @@ public final static func GetContactDataArray(journal: ref<JournalManager>, inclu
           };
         } else {
           contactVirtualListData.m_collapsable = false;
-        };
+          // Check if the single converation has a more recent timestamp
+          if conversationsCount > 0 {
+            conversationEntry = conversations[0] as JournalPhoneConversation;
+            // This timestamp appears to be when you first started the conversation
+            let convoTimestamp = journal.GetEntryTimestamp(conversationEntry);
+            // This check is necessary for recently learned contacts
+            if ArraySize(messagesReceived) > 0 {
+              // Grab the timestamp from the most recent message
+              lastTimestamp = journal.GetEntryTimestamp(ArrayLast(messagesReceived));
+              if lastTimestamp > convoTimestamp {
+                convoTimestamp = lastTimestamp;
+              }
+            }
+            if convoTimestamp > contactData.timeStamp {
+              contactData.timeStamp = convoTimestamp;
+            }
+          }
+        }
+
         ArrayPush(virtualDataList, contactVirtualListData);
-      };
-    };
+      }
+    }
     i += 1;
-  };
+  }
   return virtualDataList;
 }
