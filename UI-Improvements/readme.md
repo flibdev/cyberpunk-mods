@@ -32,6 +32,7 @@ A collection of quality-of-life UI improvements to fix minor issues that annoyed
 - [ ] Add search filter to shards/messages
 - [X] Add vehicle thumbnail images to vehicle quests (PR #1 by djkovrik)
   - [ ] Find non-hardcoded mapping between quests and images
+- [ ] Add configuration tool (CET-based?)
 
 ## Compatability
 

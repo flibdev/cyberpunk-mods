@@ -1,0 +1,70 @@
+[heading][color=#F3E600]flib's UI Improvements[/color][/heading]
+A collection of quality-of-life UI improvements to fix minor issues that annoyed me.
+
+[i](Still creating screenshots)[/i]
+
+[line]
+
+[heading][color=#F3E600]Current Improvements[/color][/heading]
+[b]Inventory[/b]
+[list]
+[*]Iconic Items cannot be disassembled
+[/list]
+[b]Crafting[/b]
+[list]
+[*]Ammo crafting is limited to the maximum carryable per type
+[/list]
+[b]Journal[/b]
+[list]
+[*]These three features use the [b][color=#04DAF6]Toggle Comparison Tooltip[/color][/b] keybinding (defaults to Tab)
+[*]Sort Quests dynamically by timestamp/name/difficulty
+[*]Sort Messages dynamically by timestamp/name
+[*]Sort Shards dynamically by timestamp/name
+[/list]
+[b]Dialer Menu[/b]
+[list]
+[*]Contacts sorted by name
+[*]Always shows contacts that are Quest Related or have unread messages first
+[/list]
+[b]Vendors[/b]
+[list]
+[*]Iconic Items cannot be sold
+[*]Ripperdoc vendor screen only shows number of unowned mods per body category
+[/list]
+
+[heading][color=#F3E600]Localization Support[/color][/heading]
+[list]
+[*]The button hint text used by the Journal sorting methods uses existing LocKeys and [b]should[/b] be fully localized
+[/list]
+[line]
+
+[heading][color=#F3E600]Installation[/color][/heading]
+The zip files are set up to be installed automagically with Vortex or other mod managers, but if want to install it manually:
+[list]
+[*]Extract the zip file to your Cyberpunk 2077 installation folder
+[/list]
+
+[heading][color=#F3E600]Uninstallation[/color][/heading]
+[list]
+[*]Delete the [b][color=#04DAF6]flib[/color][/b] folder from the [b][color=#04DAF6]Cyberpunk 2077\r6\scripts\[/color][/b] folder
+[/list]
+
+[heading][color=#F3E600]Known Incompatibilities[/color][/heading]
+This mod is incompatible with a few other mods due to them overriding the same methods
+[list]
+[*]Incompatible with my [url=https://www.nexusmods.com/cyberpunk2077/mods/2252]Stop Accidentally Disassembling Iconics[/url] mod - this reimplements the same feature
+[*]Incompatible with djkovrik's [url=https://www.nexusmods.com/cyberpunk2077/mods/1439]Sorted Menus[/url] mod - our sorting methods are incompatible
+[*]Incompatible with djkovrik's [url=https://www.nexusmods.com/cyberpunk2077/mods/2681]No Extra Ammo Crafting[/url] mod - this reimplements the same feature
+[/list]
+[line]
+
+[heading][color=#F3E600]Credits[/color][/heading]
+[list]
+[*][url=https://www.nexusmods.com/cyberpunk2077/users/49982271]jekky[/url] for the [url=https://www.nexusmods.com/cyberpunk2077/mods/1511]redscript compiler[/url]
+[*][url=https://www.nexusmods.com/cyberpunk2077/users/100354]djkovrik[/url] for releasing mods implementing the same features but faster
+[*]The [url=https://discord.gg/Epkq79kd96]CP77 modding discord[/url]
+[/list]
+
+[heading][color=#F3E600]For Other Redscript Developers[/color][/heading]
+A listing of added and replaced methods is available on the [url=https://github.com/flibX0r/cyberpunk-mods/tree/main/UI-Improvements]github repo[/url] along with all the source code and my current todo list.
+
