@@ -1,4 +1,8 @@
-// Added logic to fill the ContactData.timeStamp field with the latest message timestamp
+/// Added field to track the parent contact of message threads
+@addField(ContactData)
+public let f_parent: wref<ContactData>;
+
+/// Added logic to fill the `ContactData.timeStamp` field with the latest message timestamp
 @replaceMethod(MessengerUtils)
 public final static func GetContactDataArray(journal: ref<JournalManager>, includeUnknown: Bool, skipEmpty: Bool, activeDataSync: wref<MessengerContactSyncData>) -> array<ref<VirutalNestedListData>> {
   let contactData: ref<ContactData>;
@@ -37,7 +41,7 @@ public final static func GetContactDataArray(journal: ref<JournalManager>, inclu
         // This timestamp appears to be when you first met the contact
         contactData.timeStamp = journal.GetEntryTimestamp(contactEntry);
         contactData.activeDataSync = activeDataSync;
-        contactData.parent = null;
+        contactData.f_parent = null;
         MessengerUtils.GetContactMessageData(contactData, journal, messagesReceived, playerReplies);
         contactVirtualListData = new VirutalNestedListData();
         contactVirtualListData.m_level = contactData.hash;
@@ -60,7 +64,7 @@ public final static func GetContactDataArray(journal: ref<JournalManager>, inclu
             // This timestamp appears to be when you first started the conversation
             threadData.timeStamp = journal.GetEntryTimestamp(conversationEntry);
             threadData.activeDataSync = activeDataSync;
-            threadData.parent = contactData;
+            threadData.f_parent = contactData;
             MessengerUtils.GetContactMessageData(threadData, journal, messagesReceived, playerReplies);
             threadVirtualListData = new VirutalNestedListData();
             threadVirtualListData.m_collapsable = false;

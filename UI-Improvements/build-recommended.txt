@@ -1,9 +1,8 @@
-r6\scripts\flib\_common\
 r6\scripts\flib\shared\
 r6\scripts\flib\Crafting-MaxAmmo.reds
 r6\scripts\flib\DialerMenu-ByName.reds
 r6\scripts\flib\IconicItems-PreventRemoval.reds
-r6\scripts\flib\Messages-ByTimestamp.reds
+r6\scripts\flib\Messages-CustomSort.reds
+r6\scripts\flib\Quests-CustomSort.reds
 r6\scripts\flib\RipperDoc-OnlyCountUnowned.reds
-r6\scripts\flib\Scope-ShowType.reds
-r6\scripts\flib\Shards-ByName.reds
+r6\scripts\flib\Shards-CustomSort.reds

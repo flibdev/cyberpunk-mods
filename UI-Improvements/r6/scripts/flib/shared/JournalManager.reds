@@ -1,4 +1,4 @@
-// Added logic to fill the ContactData.timeStamp field
+/// Added logic to fill the ContactData.timeStamp field
 @replaceMethod(JournalManager)
 public final func GetContactDataArray(includeUnknown: Bool) -> array<ref<IScriptable>> {
   let contactData: ref<ContactData>;
@@ -49,7 +49,7 @@ public final func GetContactDataArray(includeUnknown: Bool) -> array<ref<IScript
         contactData.localizedName = contactEntry.GetLocalizedName(this);
         contactData.avatarID = contactEntry.GetAvatarID(this);
         contactData.questRelated = ArrayContains(trackedChildEntriesHashList, contactData.hash);
-        contactData.parent = null;
+        contactData.f_parent = null;
 
         ArrayClear(messagesReceived);
         ArrayClear(playerReplies);

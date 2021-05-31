@@ -1,7 +1,7 @@
 /// Calculates the number of ammo cases to craft for max ammo of a given type
 /// Now with no magic numbers!
 @addMethod(CraftingSystem)
-protected func GetAmmoCraftingMaximum(itemRecord: wref<Item_Record>) -> Int32 {
+protected func flibGetAmmoCraftingMaximum(itemRecord: wref<Item_Record>) -> Int32 {
   let trans: ref<TransactionSystem> = GameInstance.GetTransactionSystem(this.GetGameInstance());
   let player: ref<GameObject> = this.m_playerCraftBook.m_owner;
   let itemRecipe: ref<RecipeData> = this.GetRecipeData(itemRecord);  
@@ -29,8 +29,8 @@ protected func GetAmmoCraftingMaximum(itemRecord: wref<Item_Record>) -> Int32 {
 /// Overloaded method that takes a gameItemData reference instead of an Item_Record
 /// To support the overloaded versions of CanItemBeCrafted
 @addMethod(CraftingSystem)
-protected func GetAmmoCraftingMaximum(itemData: wref<gameItemData>) -> Int32 {
-  return this.GetAmmoCraftingMaximum(TweakDBInterface.GetItemRecord(ItemID.GetTDBID(itemData.GetID())));
+protected func flibGetAmmoCraftingMaximum(itemData: wref<gameItemData>) -> Int32 {
+  return this.flibGetAmmoCraftingMaximum(TweakDBInterface.GetItemRecord(ItemID.GetTDBID(itemData.GetID())));
 }
 
 /// Added ammo max check
@@ -52,7 +52,7 @@ public final const func GetMaxCraftingAmount(itemData: wref<gameItemData>) -> In
     i += 1;
   };
   if (itemData.HasTag(n"Ammo")) {
-    return Min(result, this.GetAmmoCraftingMaximum(itemData));
+    return Min(result, this.flibGetAmmoCraftingMaximum(itemData));
   }
   return result;
 }
@@ -65,7 +65,7 @@ public final const func CanItemBeCrafted(itemData: wref<gameItemData>) -> Bool {
   let requiredIngredients: array<IngredientData> = this.GetItemCraftingCost(itemData);
   switch itemData.GetItemType() {
     case gamedataItemType.Con_Ammo:
-      result = this.HasIngredients(requiredIngredients) && this.GetAmmoCraftingMaximum(itemData) > 0;
+      result = this.HasIngredients(requiredIngredients) && this.flibGetAmmoCraftingMaximum(itemData) > 0;
       break;
     case gamedataItemType.Prt_Program:
       result = this.HasIngredients(requiredIngredients);
@@ -85,7 +85,7 @@ public final const func CanItemBeCrafted(itemRecord: wref<Item_Record>) -> Bool 
   let requiredIngredients: array<IngredientData> = this.GetItemCraftingCost(itemRecord);
   switch itemRecord.ItemType().Type() {
     case gamedataItemType.Con_Ammo:
-      result = this.HasIngredients(requiredIngredients) && this.GetAmmoCraftingMaximum(itemRecord) > 0;
+      result = this.HasIngredients(requiredIngredients) && this.flibGetAmmoCraftingMaximum(itemRecord) > 0;
       break;
     case gamedataItemType.Prt_Program:
       result = this.HasIngredients(requiredIngredients);
