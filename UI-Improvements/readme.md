@@ -87,18 +87,10 @@ class JournalManager {
 }
 
 class MessengerContactDataView {
-  // Added field
-  private let f_sortOrder: flibSortOrder;
-  // Added methods
+  // Added method
   public static func flibGetContactFromListData(listData: ref<VirutalNestedListData>) -> ref<ContactData>
-  public final func flibSetSortOrder(order: flibSortOrder) -> Void
   // Added method that overrides parent class
   protected func PreSortItems(compareBuilder: ref<CompareBuilder>, left: ref<VirutalNestedListData>, right: ref<VirutalNestedListData>) -> Void {
-}
-
-class MessengerContactsVirtualNestedListController {
-  // Added method
-  public final func flibSetSortOrder(order: flibSortOrder) -> Void
 }
 
 class MessengerGameController {
@@ -124,17 +116,8 @@ class QuestDetailsPanelController {
 }
 
 class QuestListVirtualNestedDataView {
-  // Added field
-  private let f_sortOrder: flibSortOrder;
-  // Added method
-  public final func flibSetSortOrder(order: flibSortOrder) -> Void
   // Replaced method
   protected func SortItems(compareBuilder: ref<CompareBuilder>, left: ref<VirutalNestedListData>, right: ref<VirutalNestedListData>) -> Void
-}
-
-class QuestListVirtualNestedListController {
-  // Added method
-  public final func flibSetSortOrder(order: flibSortOrder) -> Void
 }
 
 class questLogGameController {
@@ -181,20 +164,12 @@ class ShardsMenuGameController {
 }
 
 class ShardsNestedListDataView {
-  // Added field
-  private let f_sortOrder: flibSortOrder;
   // Added methods
-  public final func flibSetSortOrder(order: flibSortOrder) -> Void 
   public static func flibGetShardGroupFromListData(listData: ref<VirutalNestedListData>) -> ref<ShardEntryData>
   // Added method that overrides parent class
   protected func PreSortItems(compareBuilder: ref<CompareBuilder>, left: ref<VirutalNestedListData>, right: ref<VirutalNestedListData>) -> Void
   // Replaced methods
   protected func SortItems(compareBuilder: ref<CompareBuilder>, left: ref<VirutalNestedListData>, right: ref<VirutalNestedListData>) -> Void
-}
-
-class ShardsVirtualNestedListController {
-  // Added method
-  public final func flibSetSortOrder(order: flibSortOrder) -> Void
 }
 
 class UIScriptableSystem {
@@ -214,6 +189,18 @@ class UIScriptableSystem {
 class Vendor {
   // Replaced methods
   public final const func PlayerCanSell(itemID: ItemID, allowQuestItems: Bool, excludeEquipped: Bool) -> Bool
+}
+
+class VirtualNestedListController {
+  // Added method
+  public final func flibSetSortOrder(order: flibSortOrder) -> Void
+}
+
+class VirtualNestedListDataView {
+  // Added field
+  private let f_sortOrder: flibSortOrder;
+  // Added method
+  public final func flibSetSortOrder(order: flibSortOrder) -> Void
 }
 ```
 

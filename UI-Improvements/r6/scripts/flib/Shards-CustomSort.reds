@@ -2,19 +2,10 @@
 
 Implementation of custom sorting at runtime for the Shards screen
 
-@see file:Messages-CustomSort.reds
+@see file:shared/VirtualNestedList.reds
 */
 
 /// @section ShardsNestedListDataView
-
-@addField(ShardsNestedListDataView)
-private let f_sortOrder: flibSortOrder;
-
-@addMethod(ShardsNestedListDataView)
-public final func flibSetSortOrder(order: flibSortOrder) -> Void {
-  this.f_sortOrder = order;
-  this.Sort();
-}
 
 /// Sort shard groups by the enum stored in f_itemSortMode
 @addMethod(ShardsNestedListDataView)
@@ -76,15 +67,6 @@ public static func flibGetShardGroupFromListData(listData: ref<VirutalNestedList
   }
 
   return shard;
-}
-
-//--------------------------------------------------------------------------------------------------
-/// @section ShardsVirtualNestedListController
-
-/// A simple pass-through method to transfer the sort order
-@addMethod(ShardsVirtualNestedListController)
-public final func flibSetSortOrder(order: flibSortOrder) -> Void {
-  this.m_currentDataView.flibSetSortOrder(order);
 }
 
 //--------------------------------------------------------------------------------------------------

@@ -2,22 +2,13 @@
 
 Implementation of custom sorting at runtime for the Quests screen
 
-@see file:Messages-CustomSort.reds
+@see file:shared/VirtualNestedList.reds
 */
 
 /** @section QuestListVirtualNestedDataView
 
 Quests are the only VirtualNestedDataView that doesn't need its group sorting fixed
 */
-
-@addField(QuestListVirtualNestedDataView)
-private let f_sortOrder: flibSortOrder;
-
-@addMethod(QuestListVirtualNestedDataView)
-public final func flibSetSortOrder(order: flibSortOrder) -> Void {
-  this.f_sortOrder = order;
-  this.Sort();
-}
 
 /// Sort the quests by the enum stored in f_itemSortMode
 @replaceMethod(QuestListVirtualNestedDataView)

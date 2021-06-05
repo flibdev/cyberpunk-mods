@@ -1,38 +1,13 @@
 /** @file Messages - Custom Sorting
 
 Implementation of custom sorting at runtime for the Messages screen
+
+@see file:shared/VirtualNestedList.reds
+
+
 */
 
-/** @section MessengerContactDataView
-
-The logic used in the parent class `VirtualNestedListDataView.SortItem()` method is as follows:
- 1. `PreSortItems()`
- 2. Sort by `ContactData.m_level` (set as the contact's hash)
- 3. Sort by `ContactData.m_isHeader` (is contact or conversation)
- 4. `SortItems()`
-
-`PreSortItems()` has to maintain `m_level` contiguousness or it will break the ordering of nested
-conversations, especially when opening and closing the parent contact widget. If `PreSortItems()`
-is used correctly and keeps contacts and conversations grouped together, then `SortItems()` no
-longer needs to be overridden to sort conversations by most recent as the timestamps have been fixed
-in `MessengerUtils.GetContactDataArray()`.
-
-!!! warning Learn from my pain
-    Having taken a deep dive into the "logic" and implementation of these poorly named
-    `VirtualNestedListDataView` and `VirutalNestedListData` classes, I have developed a deep hatred
-    for whatever excuse for a developer birthed these horrors into the world and forced them upon
-    their co-workers.
-*/
-
-
-@addField(MessengerContactDataView)
-private let f_sortOrder: flibSortOrder;
-
-@addMethod(MessengerContactDataView)
-public final func flibSetSortOrder(order: flibSortOrder) -> Void {
-  this.f_sortOrder = order;
-  this.Sort();
-}
+/// @section MessengerContactDataView
 
 /// Sort contacts & conversations by the enum stored in f_itemSortMode
 @addMethod(MessengerContactDataView)
@@ -68,18 +43,6 @@ public static func flibGetContactFromListData(listData: ref<VirutalNestedListDat
   }
 
   return contact;
-}
-
-//--------------------------------------------------------------------------------------------------
-/** @section MessengerContactsVirtualNestedListController
-
-The container that holds the `MessengerContactDataView` collection
-*/
-
-/// A simple pass-through method to transfer the sort order
-@addMethod(MessengerContactsVirtualNestedListController)
-public final func flibSetSortOrder(order: flibSortOrder) -> Void {
-  this.m_currentDataView.flibSetSortOrder(order);
 }
 
 //--------------------------------------------------------------------------------------------------
