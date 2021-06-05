@@ -32,6 +32,7 @@ A collection of quality-of-life UI improvements to fix minor issues that annoyed
 - [ ] Add search filter to shards/messages
 - [X] Add vehicle thumbnail images to vehicle quests (PR #1 by djkovrik)
   - [ ] Find non-hardcoded mapping between quests and images
+  - Doesn't seem to exist, could be patched in to quest archive data
 - [ ] Add configuration tool (CET-based?)
 
 ## Compatability
@@ -88,7 +89,7 @@ class JournalManager {
 class MessengerContactDataView {
   // Added field
   private let f_sortOrder: flibSortOrder;
-  // Added method
+  // Added methods
   public static func flibGetContactFromListData(listData: ref<VirutalNestedListData>) -> ref<ContactData>
   public final func flibSetSortOrder(order: flibSortOrder) -> Void
   // Added method that overrides parent class
@@ -101,12 +102,12 @@ class MessengerContactsVirtualNestedListController {
 }
 
 class MessengerGameController {
-  // Added field
+  // Added fields
   private let f_sortOrder: flibSortOrder;
   private let f_uiScriptableSystem: wref<UIScriptableSystem>;
   // Added method
   protected cb func flibOnPostOnRelease(evt: ref<inkPointerEvent>) -> Bool
-  // Replaced method
+  // Replaced methods
   protected cb func OnInitialize() -> Bool
   protected cb func OnUninitialize() -> Bool
   protected cb func OnPlayerAttach(playerPuppet: ref<GameObject>) -> Bool
@@ -115,6 +116,11 @@ class MessengerGameController {
 class MessengerUtils {
   // Replaced method
   public final static func GetContactDataArray(journal: ref<JournalManager>, includeUnknown: Bool, skipEmpty: Bool, activeDataSync: wref<MessengerContactSyncData>) -> array<ref<VirutalNestedListData>>
+}
+
+class QuestDetailsPanelController {
+  // Replace method
+  private final func SpawnMappinLink(mappinEntry: ref<JournalQuestMapPinBase>, jumpTo: Vector3) -> Void
 }
 
 class QuestListVirtualNestedDataView {
@@ -132,18 +138,23 @@ class QuestListVirtualNestedListController {
 }
 
 class questLogGameController {
-  // Added field
+  // Added fields
   private let f_sortOrder: flibSortOrder;
   private let f_uiScriptableSystem: wref<UIScriptableSystem>;
   // Added method
   protected cb func flibOnPostOnRelease(evt: ref<inkPointerEvent>) -> Bool
-  // Replaced method
+  // Replaced methods
   protected cb func OnInitialize() -> Bool
   protected cb func OnUninitialize() -> Bool
   protected cb func OnQuestListItemHoverOver(e: ref<QuestListItemHoverOverEvent>) -> Bool
   protected cb func OnQuestObjectiveHoverOver(e: ref<QuestObjectiveHoverOverEvent>) -> Bool
   protected cb func OnQuestListItemHoverOut(e: ref<QuestListItemHoverOutEvent>) -> Bool
   protected cb func OnQuestObjectiveHoverOut(e: ref<QuestObjectiveHoverOutEvent>) -> Bool
+}
+
+class QuestMappinLinkController {
+  // Added method
+  public func flib_SetupVehicleIcon(questId: String) -> Void
 }
 
 class RipperDocGameController {
@@ -157,12 +168,12 @@ class ShardEntryData {
 }
 
 class ShardsMenuGameController {
-  // Added field
+  // Added fields
   private let f_sortOrder: flibSortOrder;
   private let f_uiScriptableSystem: wref<UIScriptableSystem>;
   // Added method
   protected cb func flibOnPostOnRelease(evt: ref<inkPointerEvent>) -> Bool
-  // Replaced method
+  // Replaced methods
   protected cb func OnInitialize() -> Bool
   protected cb func OnUninitialize() -> Bool
   protected cb func OnPlayerAttach(playerPuppet: ref<GameObject>) -> Bool
@@ -172,12 +183,12 @@ class ShardsMenuGameController {
 class ShardsNestedListDataView {
   // Added field
   private let f_sortOrder: flibSortOrder;
-  // Added method
+  // Added methods
   public final func flibSetSortOrder(order: flibSortOrder) -> Void 
   public static func flibGetShardGroupFromListData(listData: ref<VirutalNestedListData>) -> ref<ShardEntryData>
   // Added method that overrides parent class
   protected func PreSortItems(compareBuilder: ref<CompareBuilder>, left: ref<VirutalNestedListData>, right: ref<VirutalNestedListData>) -> Void
-  // Replaced method
+  // Replaced methods
   protected func SortItems(compareBuilder: ref<CompareBuilder>, left: ref<VirutalNestedListData>, right: ref<VirutalNestedListData>) -> Void
 }
 
@@ -187,11 +198,11 @@ class ShardsVirtualNestedListController {
 }
 
 class UIScriptableSystem {
-  // Added field
+  // Added fields
   private let f_messagesSorting: Int32;
   private let f_questSorting: Int32;
   private let f_shardsSorting: Int32;
-  // Added method
+  // Added methods
   public final const func flibGetMessagesSorting() -> Int32
   public final const func flibGetQuestSorting() -> Int32
   public final const func flibGetShardsSorting()
@@ -201,12 +212,12 @@ class UIScriptableSystem {
 }
 
 class Vendor {
-  // Replaced method
+  // Replaced methods
   public final const func PlayerCanSell(itemID: ItemID, allowQuestItems: Bool, excludeEquipped: Bool) -> Bool
 }
 ```
 
-### New enums and classes
+### New stuff
 ```swift
 enum flibSortOrder {
   Timestamp = 0,
@@ -219,4 +230,6 @@ class flibSortingUtils {
   public static func GetSortOrderLocKey(order: flibSortOrder) -> CName
   public static func GetSortOrderButtonHint(order: flibSortOrder) -> String
 }
+
+public static func flib_GetVehicleIcon(questId: String) -> ref<UIIcon_Record>
 ```

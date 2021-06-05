@@ -21,7 +21,7 @@ class flibSortingUtils {
   public static func GetSortOrderLocKey(order: flibSortOrder) -> CName {
     switch order {
       case flibSortOrder.Timestamp:
-        return n"UI-Sorting-NewItems";
+        return n"UI-Labels-Time";
       case flibSortOrder.Name:
         return n"UI-Sorting-Name";
       case flibSortOrder.Difficulty:
