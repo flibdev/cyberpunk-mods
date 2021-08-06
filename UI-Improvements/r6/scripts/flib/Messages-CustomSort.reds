@@ -67,16 +67,10 @@ private let f_sortOrder: flibSortOrder;
 @addField(MessengerGameController)
 private let f_uiScriptableSystem: wref<UIScriptableSystem>;
 
-@replaceMethod(MessengerGameController)
+@wrapMethod(MessengerGameController)
 protected cb func OnInitialize() -> Bool {
-  let hintsWidget: wref<inkWidget> = this.SpawnFromExternal(inkWidgetRef.Get(this.m_buttonHintsManagerRef), r"base\\gameplay\\gui\\common\\buttonhints.inkwidget", n"Root");
-  this.m_buttonHintsController = hintsWidget.GetController() as ButtonHints;
-  this.m_buttonHintsController.AddButtonHint(n"back", GetLocalizedText("Common-Access-Close"));
-  this.m_dialogController = inkWidgetRef.GetController(this.m_dialogRef) as MessengerDialogViewController;
-  this.m_listController = inkWidgetRef.GetController(this.m_contactsRef) as MessengerContactsVirtualNestedListController;
-  this.m_activeData = new MessengerContactSyncData();
-  this.PlayLibraryAnimation(n"contacts_intro");
-  // Added below
+  wrappedMethod();
+
   this.m_buttonHintsController.AddButtonHint(
     flibSortingUtils.GetButtonEventName(),
     flibSortingUtils.GetSortOrderButtonHint(this.f_sortOrder)
@@ -84,20 +78,17 @@ protected cb func OnInitialize() -> Bool {
   this.RegisterToGlobalInputCallback(n"OnPostOnRelease", this, n"flibOnPostOnRelease");
 }
 
-@replaceMethod(MessengerGameController)
+@wrapMethod(MessengerGameController)
 protected cb func OnUninitialize() -> Bool {
-  this.m_menuEventDispatcher.UnregisterFromEvent(n"OnBack", this, n"OnBack");
-  // Added below
+  wrappedMethod();
+
   this.UnregisterFromGlobalInputCallback(n"OnPostOnRelease", this, n"flibOnPostOnRelease");
 }
 
-@replaceMethod(MessengerGameController)
+@wrapMethod(MessengerGameController)
 protected cb func OnPlayerAttach(playerPuppet: ref<GameObject>) -> Bool {
-  this.m_journalManager = GameInstance.GetJournalManager(this.GetPlayerControlledObject().GetGame());
-  this.m_dialogController.AttachJournalManager(this.m_journalManager);
-  this.PopulateData();
-  this.m_journalManager.RegisterScriptCallback(this, n"OnJournalUpdate", gameJournalListenerType.Visited);
-  // Added below
+  wrappedMethod(playerPuppet);
+
   this.f_uiScriptableSystem = UIScriptableSystem.GetInstance(playerPuppet.GetGame());
   this.f_sortOrder = IntEnum(this.f_uiScriptableSystem.flibGetMessagesSorting());
   this.m_listController.flibSetSortOrder(this.f_sortOrder);

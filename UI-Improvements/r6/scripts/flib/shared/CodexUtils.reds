@@ -1,5 +1,5 @@
 
-// Added field to track the group each shard belongs to
+/// Added field to track the group each shard belongs to
 @addField(ShardEntryData)
 public let f_group: wref<ShardEntryData>;
 
@@ -23,6 +23,16 @@ public final static func GetShardsDataArray(journal: ref<JournalManager>, active
   let latestTimestamp: GameTime;
   context.stateFilter.active = true;
   journal.GetOnscreens(context, groups);
+
+  let tf = TableFormatter.Make();
+  tf.AddColumn("Group", 16, ColumnAlignment.Left);
+  tf.AddColumn("Hash", 8, ColumnAlignment.Left);
+  tf.AddColumn("Title", 64, ColumnAlignment.Left);
+  tf.AddColumn("New", 3, ColumnAlignment.Left);
+
+  tf.LogHeader();
+  let tableRow: array<String>;
+
   i = 0;
   while i < ArraySize(groups) {
     curGroup = groups[i];
@@ -35,6 +45,13 @@ public final static func GetShardsDataArray(journal: ref<JournalManager>, active
     groupData.m_activeDataSync = activeDataSync;
     groupData.m_counter = ArraySize(shards);
     groupData.f_group = null;
+
+    ArrayClear(tableRow);
+    ArrayPush(tableRow, groupData.m_title);
+    ArrayPush(tableRow, "");
+    ArrayPush(tableRow, "");
+    ArrayPush(tableRow, "");
+    tf.LogRow(tableRow);
 
     j = 0;
     while j < ArraySize(shards) {
@@ -61,9 +78,18 @@ public final static func GetShardsDataArray(journal: ref<JournalManager>, active
       if shardData.m_isNew {
         hasNewEntries = true;
       };
+
+      ArrayClear(tableRow);
+      ArrayPush(tableRow, groupData.m_title);
+      ArrayPush(tableRow, StringUtils.Uint32ToHexStr(Cast(shardData.m_hash)));
+      ArrayPush(tableRow, GetLocalizedText(shardData.m_title));
+      ArrayPush(tableRow, shardData.m_isNew ? "New" : "");
+
+      tf.LogRow(tableRow);
+
       j += 1;
     };
-    
+
     groupData.m_isNew = hasNewEntries;
     groupData.m_newEntries = newEntries;
     groupVirtualListData = new VirutalNestedListData();

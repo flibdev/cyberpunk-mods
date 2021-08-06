@@ -12,7 +12,7 @@ enum flibSortOrder {
 }
 
 /// Utility class to help with custom sorting
-class flibSortingUtils {
+public class flibSortingUtils {
   /// Returns the CName of the event to use for the sorting action
   /// None of the screens I've added sorting to use the comparison tooltips
   public static func GetButtonEventName() -> CName = n"toggle_comparison_tooltip"

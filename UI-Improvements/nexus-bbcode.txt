@@ -1,14 +1,13 @@
 [heading][color=#F3E600]flib's UI Improvements[/color][/heading]
 A collection of quality-of-life UI improvements to fix minor issues that annoyed me.
 
-[i](Still creating screenshots)[/i]
-
 [line]
 
 [heading][color=#F3E600]Current Improvements[/color][/heading]
 [b]Inventory[/b]
 [list]
 [*]Iconic Items cannot be disassembled
+[*][color=#F3E600]NEW:[/color] Light Machine Gun weapon mod slots actually work now
 [/list]
 [b]Crafting[/b]
 [list]
@@ -16,6 +15,7 @@ A collection of quality-of-life UI improvements to fix minor issues that annoyed
 [/list]
 [b]Journal[/b]
 [list]
+[*][color=#F3E600]NEW:[/color] Vehicle quests show an image of the vehicle (thanks [url=https://www.nexusmods.com/cyberpunk2077/users/100354]djkovrik[/url])
 [*]These three features use the [b][color=#04DAF6]Toggle Comparison Tooltip[/color][/b] keybinding (defaults to Tab)
 [*]Sort Quests dynamically by timestamp/name/difficulty
 [*]Sort Messages dynamically by timestamp/name
@@ -39,14 +39,17 @@ A collection of quality-of-life UI improvements to fix minor issues that annoyed
 [line]
 
 [heading][color=#F3E600]Installation[/color][/heading]
+This mod requires the latest version of [url=https://www.nexusmods.com/cyberpunk2077/mods/1511]redscript[/url] to be installed.
+
 The zip files are set up to be installed automagically with Vortex or other mod managers, but if want to install it manually:
 [list]
 [*]Extract the zip file to your Cyberpunk 2077 installation folder
 [/list]
+You should end up with a [b][color=#04DAF6]flib[/color][/b] folder in the [b][color=#04DAF6]Cyberpunk 2077\r6\scripts\[/color][/b] directory
 
 [heading][color=#F3E600]Uninstallation[/color][/heading]
 [list]
-[*]Delete the [b][color=#04DAF6]flib[/color][/b] folder from the [b][color=#04DAF6]Cyberpunk 2077\r6\scripts\[/color][/b] folder
+[*]Delete the [b][color=#04DAF6]flib[/color][/b] folder from the [b][color=#04DAF6]Cyberpunk 2077\r6\scripts\[/color][/b] directory
 [/list]
 
 [heading][color=#F3E600]Known Incompatibilities[/color][/heading]
@@ -66,5 +69,5 @@ This mod is incompatible with a few other mods due to them overriding the same m
 [/list]
 
 [heading][color=#F3E600]For Other Redscript Developers[/color][/heading]
-A listing of added and replaced methods is available on the [url=https://github.com/flibX0r/cyberpunk-mods/tree/main/UI-Improvements]github repo[/url] along with all the source code and my current todo list.
+A listing of added, replaced and wrapped methods is available on the [url=https://github.com/flibX0r/cyberpunk-mods/tree/main/UI-Improvements]github repo[/url] along with all the source code and my current todo list.
 

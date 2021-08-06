@@ -78,37 +78,23 @@ private let f_sortOrder: flibSortOrder;
 @addField(ShardsMenuGameController)
 private let f_uiScriptableSystem: wref<UIScriptableSystem>;
 
-@replaceMethod(ShardsMenuGameController)
+@wrapMethod(ShardsMenuGameController)
 protected cb func OnInitialize() -> Bool {
-  let hintsWidget: ref<inkWidget> = this.SpawnFromExternal(inkWidgetRef.Get(this.m_buttonHintsManagerRef), r"base\\gameplay\\gui\\common\\buttonhints.inkwidget", n"Root");
-  this.m_buttonHintsController = hintsWidget.GetController() as ButtonHints;
-  this.RefreshButtonHints();
-  this.m_entryViewController = inkWidgetRef.GetController(this.m_entryViewRef) as CodexEntryViewController;
-  this.m_listController = inkWidgetRef.GetController(this.m_virtualList) as ShardsVirtualNestedListController;
-  this.m_activeData = new CodexListSyncData();
-  inkWidgetRef.SetVisible(this.m_entryViewRef, false);
-  this.PlayLibraryAnimation(n"shards_intro");
-  // Added below
+  wrappedMethod();
+
   this.RegisterToGlobalInputCallback(n"OnPostOnRelease", this, n"flibOnPostOnRelease");
 }
 
 
-@replaceMethod(ShardsMenuGameController)
+@wrapMethod(ShardsMenuGameController)
 protected cb func OnUninitialize() -> Bool {
-  this.m_menuEventDispatcher.UnregisterFromEvent(n"OnBack", this, n"OnBack");
-  // Added below
+  wrappedMethod();
+
   this.UnregisterFromGlobalInputCallback(n"OnPostOnRelease", this, n"flibOnPostOnRelease");
 }
 
-@replaceMethod(ShardsMenuGameController)
+@wrapMethod(ShardsMenuGameController)
 protected cb func OnPlayerAttach(playerPuppet: ref<GameObject>) -> Bool {
-  this.m_journalManager = GameInstance.GetJournalManager(playerPuppet.GetGame());
-  this.m_journalManager.RegisterScriptCallback(this, n"OnEntryVisitedUpdate", gameJournalListenerType.Visited);
-  this.m_InventoryManager = new InventoryDataManagerV2();
-  this.m_player = playerPuppet as PlayerPuppet;
-  this.m_InventoryManager.Initialize(this.m_player);
-  this.RegisterToGlobalInputCallback(n"OnPostOnRelease", this, n"OnButtonRelease");
-  // Inserted below
   this.f_uiScriptableSystem = UIScriptableSystem.GetInstance(playerPuppet.GetGame());
   this.f_sortOrder = IntEnum(this.f_uiScriptableSystem.flibGetShardsSorting());
   this.m_listController.flibSetSortOrder(this.f_sortOrder);
@@ -116,24 +102,14 @@ protected cb func OnPlayerAttach(playerPuppet: ref<GameObject>) -> Bool {
     flibSortingUtils.GetButtonEventName(),
     flibSortingUtils.GetSortOrderButtonHint(this.f_sortOrder)
   );
-  // Inserted above
-  this.PopulateData();
-  this.SelectEntry();
+
+  wrappedMethod(playerPuppet);
 }
 
-@replaceMethod(ShardsMenuGameController)
+@wrapMethod(ShardsMenuGameController)
 private final func RefreshButtonHints() -> Void {
-  this.m_buttonHintsController.ClearButtonHints();
-  this.m_buttonHintsController.AddButtonHint(n"back", GetLocalizedText("Common-Access-Close"));
-  if this.m_isEncryptedEntrySelected {
-    this.PlaySound(n"MapPin", n"OnDisable");
-    inkWidgetRef.SetVisible(this.m_crackHint, true);
-    this.PlayAnim(n"hint_show");
-  } else {
-    inkWidgetRef.SetVisible(this.m_crackHint, false);
-    this.PlayAnim(n"hint_hide");
-  };
-  // Added below
+  wrappedMethod();
+
   this.m_buttonHintsController.AddButtonHint(
     flibSortingUtils.GetButtonEventName(),
     flibSortingUtils.GetSortOrderButtonHint(this.f_sortOrder)
@@ -162,6 +138,67 @@ protected cb func flibOnPostOnRelease(evt: ref<inkPointerEvent>) -> Bool {
     // Force UI refresh
     this.PopulateData();
   }
+}
+
+@replaceMethod(ShardsMenuGameController)
+private final func PopulateData() -> Void {
+  let groupData: ref<ShardEntryData>;
+  let groupVirtualListData: ref<VirutalNestedListData>;
+  let newEntries: array<Int32>;
+  let items: array<InventoryItemData>;
+  let data: array<ref<VirutalNestedListData>>;
+  let level: Int32 = 0;
+  let counter: Int32 = 0;
+  let i: Int32 = 0;
+
+  items = this.m_InventoryManager.GetPlayerItemsByType(gamedataItemType.Gen_Misc, false, [n"HideInBackpackUI"]);
+  data  = CodexUtils.GetShardsDataArray(this.m_journalManager, this.m_activeData);
+  level = ArraySize(data);
+  this.m_hasNewCryptedEntries = false;
+
+  i = 0;
+  while i < ArraySize(items) {
+    if this.ProcessItem(items[i], data, level, AsRef(newEntries)) {
+      counter += 1;
+    }
+    i += 1;
+  }
+
+  if counter > 0 {
+    groupData = new ShardEntryData();
+    groupData.m_title = "[" + GetLocalizedTextByKey(n"Story-base-journal-codex-tutorials-Endryptedshards_title") + "]";
+    groupData.m_activeDataSync = this.m_activeData;
+    groupData.m_counter = counter;
+    groupData.m_isNew = this.m_hasNewCryptedEntries;
+    groupData.f_group = null;
+    groupData.m_newEntries = newEntries;
+    groupVirtualListData = new VirutalNestedListData();
+    groupVirtualListData.m_level = level;
+    groupVirtualListData.m_widgetType = 1u;
+    groupVirtualListData.m_isHeader = true;
+    groupVirtualListData.m_data = groupData;
+
+    for shardListData in data {
+      if !shardListData.m_isHeader {
+        let shard = shardListData.m_data as ShardEntryData;
+        if IsDefined(shard) && shard.m_isCrypted {
+          shard.f_group = groupData;
+        }
+      }
+    }
+
+    ArrayPush(data, groupVirtualListData);
+  }
+
+  if ArraySize(data) > 0 {
+    this.HideNodataWarning();
+    this.m_listController.SetData(data, true, true);
+  }
+  else {
+    this.ShowNodataWarning();
+  }
+
+  this.RefreshButtonHints();
 }
 
 //--------------------------------------------------------------------------------------------------

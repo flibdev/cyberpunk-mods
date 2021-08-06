@@ -1,10 +1,4 @@
-/** @file Sorting Utilities
-
-Common sorting utilities shared between each of the new sorted menus
-*/
-
-
-/** @section MessengerContactDataView
+/** @file Quests - Vehicle Previews
 
 Quests have a type enum, vehicle quests can be filtered by `gameJournalQuestType.VehicleQuest`
 

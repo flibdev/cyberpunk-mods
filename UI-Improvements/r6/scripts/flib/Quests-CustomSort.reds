@@ -54,21 +54,14 @@ private let f_sortOrder: flibSortOrder;
 @addField(questLogGameController)
 private let f_uiScriptableSystem: wref<UIScriptableSystem>;
 
-@replaceMethod(questLogGameController)
+@wrapMethod(questLogGameController)
 protected cb func OnInitialize() -> Bool {
-  this.m_game = this.GetPlayerControlledObject().GetGame();
-  this.m_journalManager = GameInstance.GetJournalManager(this.m_game);
-  this.m_journalManager.RegisterScriptCallback(this, n"OnJournalReady", gameJournalListenerType.State);
-  this.m_playerLevel = RoundMath(GameInstance.GetStatsSystem(this.m_game).GetStatValue(Cast(this.GetPlayerControlledObject().GetEntityID()), gamedataStatType.Level));
-  this.OnJournalReady(0u, n"", JournalNotifyOption.Notify, JournalChangeType.Undefined);
-  this.m_buttonHintsController = this.SpawnFromExternal(inkWidgetRef.Get(this.m_buttonHints), r"base\\gameplay\\gui\\common\\buttonhints.inkwidget", n"Root").GetController() as ButtonHints;
-  this.m_buttonHintsController.AddButtonHint(n"back", GetLocalizedText("Common-Access-Close"));
-  this.PlayLibraryAnimation(n"journal_intro");
-  // Added below
+  wrappedMethod();
+
   this.RegisterToGlobalInputCallback(n"OnPostOnRelease", this, n"flibOnPostOnRelease");
   this.f_uiScriptableSystem = UIScriptableSystem.GetInstance(this.m_game);
   this.f_sortOrder = IntEnum(this.f_uiScriptableSystem.flibGetQuestSorting());
-  // Oof
+
   (inkWidgetRef.GetController(this.m_virtualList) as QuestListVirtualNestedListController).flibSetSortOrder(this.f_sortOrder);
   this.m_buttonHintsController.AddButtonHint(
     flibSortingUtils.GetButtonEventName(),
@@ -76,10 +69,10 @@ protected cb func OnInitialize() -> Bool {
   );
 }
 
-@replaceMethod(questLogGameController)
+@wrapMethod(questLogGameController)
 protected cb func OnUninitialize() -> Bool {
-  this.m_menuEventDispatcher.UnregisterFromEvent(n"OnBack", this, n"OnBack");
-  // Added below
+  wrappedMethod();
+
   this.UnregisterFromGlobalInputCallback(n"OnPostOnRelease", this, n"flibOnPostOnRelease");
 }
 
@@ -116,49 +109,40 @@ protected cb func flibOnPostOnRelease(evt: ref<inkPointerEvent>) -> Bool {
   }
 }
 
-@replaceMethod(questLogGameController)
+@wrapMethod(questLogGameController)
 protected cb func OnQuestListItemHoverOver(e: ref<QuestListItemHoverOverEvent>) -> Bool {
-  this.m_buttonHintsController.ClearButtonHints();
-  this.m_buttonHintsController.AddButtonHint(n"back", GetLocalizedText("Common-Access-Close"));
-  if !e.m_isQuestResolved {
-    this.m_buttonHintsController.AddButtonHint(n"activate", GetLocalizedText("UI-UserActions-TrackObjective"));
-  };
-  this.m_buttonHintsController.AddButtonHint(n"select", GetLocalizedText("UI-UserActions-Select"));
-  // Added below
+  wrappedMethod(e);
+
   this.m_buttonHintsController.AddButtonHint(
     flibSortingUtils.GetButtonEventName(),
     flibSortingUtils.GetSortOrderButtonHint(this.f_sortOrder)
   );
 }
 
-@replaceMethod(questLogGameController)
+@wrapMethod(questLogGameController)
 protected cb func OnQuestObjectiveHoverOver(e: ref<QuestObjectiveHoverOverEvent>) -> Bool {
-  this.m_buttonHintsController.ClearButtonHints();
-  this.m_buttonHintsController.AddButtonHint(n"back", GetLocalizedText("Common-Access-Close"));
-  this.m_buttonHintsController.AddButtonHint(n"activate", GetLocalizedText("UI-UserActions-TrackObjective"));
-  // Added below
+  wrappedMethod(e);
+
   this.m_buttonHintsController.AddButtonHint(
     flibSortingUtils.GetButtonEventName(),
     flibSortingUtils.GetSortOrderButtonHint(this.f_sortOrder)
   );
 }
 
-@replaceMethod(questLogGameController)
+@wrapMethod(questLogGameController)
 protected cb func OnQuestListItemHoverOut(e: ref<QuestListItemHoverOutEvent>) -> Bool {
-  this.m_buttonHintsController.ClearButtonHints();
-  this.m_buttonHintsController.AddButtonHint(n"back", GetLocalizedText("Common-Access-Close"));
-  // Added below
+  wrappedMethod(e);
+
   this.m_buttonHintsController.AddButtonHint(
     flibSortingUtils.GetButtonEventName(),
     flibSortingUtils.GetSortOrderButtonHint(this.f_sortOrder)
   );
 }
 
-@replaceMethod(questLogGameController)
+@wrapMethod(questLogGameController)
 protected cb func OnQuestObjectiveHoverOut(e: ref<QuestObjectiveHoverOutEvent>) -> Bool {
-  this.m_buttonHintsController.ClearButtonHints();
-  this.m_buttonHintsController.AddButtonHint(n"back", GetLocalizedText("Common-Access-Close"));
-  // Added below
+  wrappedMethod(e);
+
   this.m_buttonHintsController.AddButtonHint(
     flibSortingUtils.GetButtonEventName(),
     flibSortingUtils.GetSortOrderButtonHint(this.f_sortOrder)

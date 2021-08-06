@@ -4,6 +4,7 @@ A collection of quality-of-life UI improvements to fix minor issues that annoyed
 
 ### Inventory
 - Iconic Items cannot be disassembled
+- Light Machine Gun weapon mods now actually work
 
 ### Crafting
 - Ammo crafting is limited to the maximum carryable per type
@@ -33,7 +34,9 @@ A collection of quality-of-life UI improvements to fix minor issues that annoyed
 - [X] Add vehicle thumbnail images to vehicle quests (PR #1 by djkovrik)
   - [ ] Find non-hardcoded mapping between quests and images
   - Doesn't seem to exist, could be patched in to quest archive data
+- [X] Fixing LMG weapon mods
 - [ ] Add configuration tool (CET-based?)
+- [ ] Add tagging of favourite items to prevent them being sold or disassembled
 
 ## Compatability
 
@@ -99,7 +102,7 @@ class MessengerGameController {
   private let f_uiScriptableSystem: wref<UIScriptableSystem>;
   // Added method
   protected cb func flibOnPostOnRelease(evt: ref<inkPointerEvent>) -> Bool
-  // Replaced methods
+  // Wrapped methods
   protected cb func OnInitialize() -> Bool
   protected cb func OnUninitialize() -> Bool
   protected cb func OnPlayerAttach(playerPuppet: ref<GameObject>) -> Bool
@@ -126,7 +129,7 @@ class questLogGameController {
   private let f_uiScriptableSystem: wref<UIScriptableSystem>;
   // Added method
   protected cb func flibOnPostOnRelease(evt: ref<inkPointerEvent>) -> Bool
-  // Replaced methods
+  // Wrapped methods
   protected cb func OnInitialize() -> Bool
   protected cb func OnUninitialize() -> Bool
   protected cb func OnQuestListItemHoverOver(e: ref<QuestListItemHoverOverEvent>) -> Bool
@@ -145,6 +148,11 @@ class RipperDocGameController {
   private final func GetAmountOfAvailableItems(equipArea: gamedataEquipmentArea) -> Int32
 }
 
+class RPGManager {
+  // Replaced method
+  public final static func GetModsSlotIDs(type: gamedataItemType) -> array<TweakDBID>
+}
+
 class ShardEntryData {
   // Added field
   public let f_group: wref<ShardEntryData>;
@@ -156,7 +164,7 @@ class ShardsMenuGameController {
   private let f_uiScriptableSystem: wref<UIScriptableSystem>;
   // Added method
   protected cb func flibOnPostOnRelease(evt: ref<inkPointerEvent>) -> Bool
-  // Replaced methods
+  // Wrapped methods
   protected cb func OnInitialize() -> Bool
   protected cb func OnUninitialize() -> Bool
   protected cb func OnPlayerAttach(playerPuppet: ref<GameObject>) -> Bool

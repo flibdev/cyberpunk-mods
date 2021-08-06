@@ -14,7 +14,6 @@ My collection of quality-of-life UI improvements
 
 ### Mods
 
-- [ ] Fixing HMG weapon mods
 - [ ] @Pseudodiego#0822 on Discord asked if I could look into pushing custom messages to the journal
 - [ ] Steal the AR driving directions from Panam's questline/street races and add them to regular driving nav
 - [ ] Extract fonts used in-game and generate a list of supported glyphs
@@ -25,7 +24,6 @@ My collection of quality-of-life UI improvements
 - [ ] Add support for hex literals
 - [ ] Add support for `enum == enum` conditional
 - [ ] Add `struct` support (more complex than just a class flag)
-- [ ] Add documentation comments to the AST
 - [ ] Add attribute for appending to methods instead of replacing them
 - [ ] Add support for casting `array<ref<*>>` to `array<Variant>` (if possible, might have to be `script_ref<*>`)
 - [ ] Add support for C-style `for`-loops (as syntactic sugar since that's how CDPR's compiler does them)
