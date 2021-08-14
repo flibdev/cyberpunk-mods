@@ -10,7 +10,7 @@ env:
   VERSION: ${{ github.event.inputs.version }}
   BASEPATH: './UI-Improvements/'
   ZIPPATHS: 'r6/'
-  FILENAME: ${{ format('ui-improvements-{1}.zip', github.event.inputs.version) }}
+  FILENAME: ${{ format('ui-improvements-{0}.zip', github.event.inputs.version) }}
 jobs:
   build:
     name: 'Build Artifact'
