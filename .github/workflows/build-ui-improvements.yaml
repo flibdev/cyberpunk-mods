@@ -1,0 +1,24 @@
+name: build-ui-improvements
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version
+        required: true
+jobs:
+  build_artifact:
+    runs-on: ubuntu-latest
+    env:
+      FILENAME: ${{ format('ui-improvements-{}', github.event.inputs.version ) }}
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v2
+      - name: 'Build artifact'
+        run: |
+          cd UI-Improvements
+          zip -r $FILENAME r6/
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.FILENAME }}
+          path: ${{ env.FILENAME }}
