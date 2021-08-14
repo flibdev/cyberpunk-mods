@@ -3,22 +3,28 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: Version
+        description: Semantic Version (no prefix)
         required: true
 jobs:
   build_artifact:
     runs-on: ubuntu-latest
     env:
-      FILENAME: ${{ format('ui-improvements-{}', github.event.inputs.version ) }}
+      NAME: 'UI Improvements'
+      VERSION: ${{ github.event.inputs.version }}
+      FILENAME: ${{ format('ui-improvements-{0}.zip', env.VERSION ) }}
     steps:
       - name: 'Checkout'
         uses: actions/checkout@v2
+
       - name: 'Build artifact'
         run: |
           cd UI-Improvements
           zip -r $FILENAME r6/
-      - name: 'Upload Artifact'
-        uses: actions/upload-artifact@v2
+
+      - name: 'Create Release'
+        uses: softprops/action-gh-release@v1
         with:
-          name: ${{ env.FILENAME }}
-          path: ${{ env.FILENAME }}
+          draft: true
+          name: ${{ env.NAME }} ${{ env.VERSION }}
+          tag_name: ${{ format('v{0}', env.VERSION) }}
+          files: ${{ env.FILENAME }}
