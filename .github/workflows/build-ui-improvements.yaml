@@ -1,12 +1,13 @@
-name: build-ui-improvements
+name: 'Create UI Improvements Release'
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: Semantic Version (no prefix)
+        description: 'Semantic Version'
         required: true
 jobs:
-  build_artifact:
+  create_release:
+    name: 'Create Release'
     runs-on: ubuntu-latest
     env:
       NAME: 'UI Improvements'
