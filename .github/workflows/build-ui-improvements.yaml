@@ -11,7 +11,7 @@ jobs:
     env:
       NAME: 'UI Improvements'
       VERSION: ${{ github.event.inputs.version }}
-      FILENAME: ${{ format('~/ui-improvements-{0}.zip', github.event.inputs.version ) }}
+      FILENAME: ${{ format('{0}/ui-improvements-{1}.zip', github.workspace, github.event.inputs.version ) }}
     steps:
       - name: 'Checkout'
         uses: actions/checkout@v2
