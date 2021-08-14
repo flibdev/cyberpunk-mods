@@ -13,7 +13,7 @@ env:
   FILENAME: ${{ format('ui-improvements-{0}.zip', github.event.inputs.version) }}
 jobs:
   build:
-    name: 'Build Artifact'
+    name: 'Build & Release'
     runs-on: ubuntu-latest
     steps:
       - name: 'Set ENV vars'
@@ -25,7 +25,7 @@ jobs:
       - name: 'Build artifact'
         run: |
           cd $BASEPATH
-          zip -r $FILENAME $ZIPPATHS
+          zip -r $FILEPATH $ZIPPATHS
 
       - name: 'Upload'
         uses: actions/upload-artifact@v2
