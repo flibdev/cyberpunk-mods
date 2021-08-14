@@ -1,24 +1,42 @@
-name: build-ui-improvements
+name: 'Create UI Improvements Release'
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: Version
+        description: 'Semantic Version'
         required: true
+env:
+  NAME: 'UI Improvements'
+  VERSION: ${{ github.event.inputs.version }}
+  BASEPATH: './UI-Improvements/'
+  ZIPPATHS: 'r6/'
+  FILENAME: ${{ format('ui-improvements-{0}.zip', github.event.inputs.version) }}
 jobs:
-  build_artifact:
+  build:
+    name: 'Build & Release'
     runs-on: ubuntu-latest
-    env:
-      FILENAME: ${{ format('ui-improvements-{}', github.event.inputs.version ) }}
     steps:
+      - name: 'Set ENV vars'
+        run: echo "FILEPATH=$GITHUB_WORKSPACE/$FILENAME" >> $GITHUB_ENV
+
       - name: 'Checkout'
         uses: actions/checkout@v2
+
       - name: 'Build artifact'
         run: |
-          cd UI-Improvements
-          zip -r $FILENAME r6/
-      - name: 'Upload Artifact'
+          cd $BASEPATH
+          zip -r $FILEPATH $ZIPPATHS
+
+      - name: 'Upload'
         uses: actions/upload-artifact@v2
         with:
           name: ${{ env.FILENAME }}
-          path: ${{ env.FILENAME }}
+          path: ${{ env.FILEPATH }}
+
+      - name: 'Create Release'
+        uses: softprops/action-gh-release@v1
+        with:
+          draft: true
+          name: ${{ env.NAME }} ${{ env.VERSION }}
+          tag_name: ${{ format('v{0}', env.VERSION) }}
+          files: ${{ env.FILEPATH }}
