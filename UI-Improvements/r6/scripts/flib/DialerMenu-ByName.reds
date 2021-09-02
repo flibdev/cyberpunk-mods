@@ -9,6 +9,6 @@ public func SortItem(left: ref<IScriptable>, right: ref<IScriptable>) -> Bool {
   return this.m_compareBuilder
     .BoolTrue(leftData.questRelated, rightData.questRelated)
     .BoolTrue(ArraySize(leftData.unreadMessages) > 0, ArraySize(rightData.unreadMessages) > 0)
-    .UnicodeStringAsc(GetLocalizedText(leftData.localizedName), GetLocalizedText(rightData.localizedName))
+    .StringAsc(GetLocalizedText(leftData.localizedName), GetLocalizedText(rightData.localizedName))
     .GetBool();
 }

@@ -1,7 +1,7 @@
 
 /// Added field to track the group each shard belongs to
 @addField(ShardEntryData)
-public let f_group: wref<ShardEntryData>;
+public let f_group: ref<ShardEntryData>;
 
 /// Added logic to fill the ShardEntryData.m_timeStamp field with the latest message timestamp
 @replaceMethod(CodexUtils)
@@ -77,4 +77,34 @@ public final static func GetShardsDataArray(journal: ref<JournalManager>, active
     i += 1;
   };
   return virtualDataList;
+}
+
+// Append the tag name to one of the 4 "Other" groups
+@wrapMethod(CodexUtils)
+private final static func GetLocalizedTag(tag: CName) -> String {
+  let str: String;
+
+  if IsNameValid(tag) {
+    switch tag {
+      case n"others":
+        str = GetLocalizedText("UI-Shards-Others");
+        break;
+      case n"poetry":
+        // LocKey#10213 = Poem Of The Atoms
+        str = StrBeforeFirst(GetLocalizedText("LocKey#10213"), " ");
+        break;
+      case n"religion_philosophy":
+        // LocKey#37788 = Church
+        str = GetLocalizedText("LocKey#37788");
+        break;
+      default:
+        str = wrappedMethod(tag);
+    }
+  }
+  else {
+    // LocKey#53720 = Miscellaneous
+    str = GetLocalizedText("LocKey#53720");
+  }
+
+  return str;
 }

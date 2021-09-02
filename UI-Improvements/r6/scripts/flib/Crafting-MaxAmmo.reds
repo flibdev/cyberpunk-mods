@@ -34,23 +34,10 @@ protected func flibGetAmmoCraftingMaximum(itemData: wref<gameItemData>) -> Int32
 }
 
 /// Added ammo max check
-@replaceMethod(CraftingSystem)
+@wrapMethod(CraftingSystem)
 public final const func GetMaxCraftingAmount(itemData: wref<gameItemData>) -> Int32 {
-  let currentQuantity: Int32;
-  let currentResult: Int32;
-  let transactionSystem: ref<TransactionSystem> = GameInstance.GetTransactionSystem(this.GetGameInstance());
-  let requiredIngredients: array<IngredientData> = this.GetItemCraftingCost(itemData);
-  let result: Int32 = 10000000;
-  let i: Int32 = 0;
-  while i < ArraySize(requiredIngredients) {
-    currentQuantity = transactionSystem.GetItemQuantity(this.m_playerCraftBook.GetOwner(), ItemID.CreateQuery(requiredIngredients[i].id.GetID()));
-    if currentQuantity > requiredIngredients[i].quantity {
-      result = Min(result, currentQuantity / requiredIngredients[i].quantity);
-    } else {
-      return 0;
-    };
-    i += 1;
-  };
+  let result: Int32 = wrappedMethod(itemData);
+
   if (itemData.HasTag(n"Ammo")) {
     return Min(result, this.flibGetAmmoCraftingMaximum(itemData));
   }

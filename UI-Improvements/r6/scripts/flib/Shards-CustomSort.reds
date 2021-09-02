@@ -14,18 +14,7 @@ protected func PreSortItems(compareBuilder: ref<CompareBuilder>, left: ref<Virut
   let rightShard = ShardsNestedListDataView.flibGetShardGroupFromListData(right);
 
   if IsDefined(leftShard) && IsDefined(leftShard) {
-    switch this.f_sortOrder {
-      case flibSortOrder.Timestamp:
-        compareBuilder
-          .BoolTrue(leftShard.m_isNew, rightShard.m_isNew)
-          .GameTimeDesc(leftShard.m_timeStamp, rightShard.m_timeStamp);
-        break;
-      case flibSortOrder.Name:
-        compareBuilder.StringAsc(GetLocalizedText(leftShard.m_title), GetLocalizedText(rightShard.m_title));
-        break;
-      default:
-        break;
-    }
+    compareBuilder.StringAsc(GetLocalizedText(leftShard.m_title), GetLocalizedText(rightShard.m_title));
   }
 }
 
@@ -158,7 +147,7 @@ private final func PopulateData() -> Void {
 
   i = 0;
   while i < ArraySize(items) {
-    if this.ProcessItem(items[i], data, level, AsRef(newEntries)) {
+    if this.ProcessItem(items[i], data, level, newEntries) {
       counter += 1;
     }
     i += 1;

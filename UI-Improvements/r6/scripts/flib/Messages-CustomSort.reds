@@ -3,8 +3,6 @@
 Implementation of custom sorting at runtime for the Messages screen
 
 @see file:shared/VirtualNestedList.reds
-
-
 */
 
 /// @section MessengerContactDataView
