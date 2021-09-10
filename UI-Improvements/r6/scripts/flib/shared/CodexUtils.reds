@@ -87,15 +87,13 @@ private final static func GetLocalizedTag(tag: CName) -> String {
   if IsNameValid(tag) {
     switch tag {
       case n"others":
-        str = GetLocalizedText("UI-Shards-Others");
+        str = GetLocalizedTextByKey(n"UI-Shards-Others");
         break;
       case n"poetry":
-        // LocKey#10213 = Poem Of The Atoms
-        str = StrBeforeFirst(GetLocalizedText("LocKey#10213"), " ");
+        str = GetLocalizedTextByKey(n"UI-Shards-Poetry");
         break;
       case n"religion_philosophy":
-        // LocKey#37788 = Church
-        str = GetLocalizedText("LocKey#37788");
+        str = GetLocalizedTextByKey(n"UI-Shards-ReligionPhilosophy");
         break;
       default:
         str = wrappedMethod(tag);
@@ -103,7 +101,7 @@ private final static func GetLocalizedTag(tag: CName) -> String {
   }
   else {
     // LocKey#53720 = Miscellaneous
-    str = GetLocalizedText("LocKey#53720");
+    str = GetLocalizedTextByKey(n"LocKey#53720");
   }
 
   return str;
