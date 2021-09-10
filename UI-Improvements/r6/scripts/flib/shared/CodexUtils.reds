@@ -101,7 +101,7 @@ private final static func GetLocalizedTag(tag: CName) -> String {
   }
   else {
     // LocKey#53720 = Miscellaneous
-    str = GetLocalizedTextByKey(n"LocKey#53720");
+    str = GetLocalizedText("LocKey#53720");
   }
 
   return str;
