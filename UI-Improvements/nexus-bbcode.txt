@@ -6,8 +6,8 @@ A collection of quality-of-life UI improvements to fix minor issues that annoyed
 [heading][color=#F3E600]Current Improvements[/color][/heading]
 [b]Inventory[/b]
 [list]
+[*]Fixed the weapon mod slots not working on Light Machine Guns
 [*]Iconic Items cannot be disassembled
-[*][color=#F3E600]NEW:[/color] Light Machine Gun weapon mod slots actually work now
 [/list]
 [b]Crafting[/b]
 [list]
@@ -15,7 +15,7 @@ A collection of quality-of-life UI improvements to fix minor issues that annoyed
 [/list]
 [b]Journal[/b]
 [list]
-[*][color=#F3E600]NEW:[/color] Vehicle quests show an image of the vehicle (thanks [url=https://www.nexusmods.com/cyberpunk2077/users/100354]djkovrik[/url])
+[*][color=#F3E600]NEW:[/color] Vehicle quests now have a codex image link to the vehicle being purchased
 [*]These three features use the [b][color=#04DAF6]Toggle Comparison Tooltip[/color][/b] keybinding (defaults to Tab)
 [*]Sort Quests dynamically by timestamp/name/difficulty
 [*]Sort Messages dynamically by timestamp/name
@@ -26,8 +26,16 @@ A collection of quality-of-life UI improvements to fix minor issues that annoyed
 [*]Contacts sorted by name
 [*]Always shows contacts that are Quest Related or have unread messages first
 [/list]
+[b]Shards[/b]
+[list]
+[*][color=#F3E600]NEW:[/color] Added localized names for the 4 "Other" groups CDPR added
+[*]Fixed the name of the Encrypted shards group
+[/list]
 [b]Vendors[/b]
 [list]
+[*][color=#F3E600]NEW:[/color] Fast Buy & Sell - Allows you to buy and sell entire items stacks without any additional dialogs
+[*] - Uses the [b][color=#04DAF6]Activate Secondary[/color][/b] keybinding (defaults to Right Mouse Button)
+[*]Quantity pickers are now limited to the players/vendors total money
 [*]Iconic Items cannot be sold
 [*]Ripperdoc vendor screen only shows number of unowned mods per body category
 [/list]
@@ -35,17 +43,15 @@ A collection of quality-of-life UI improvements to fix minor issues that annoyed
 [heading][color=#F3E600]Localization Support[/color][/heading]
 [list]
 [*]The button hint text used by the Journal sorting methods uses existing LocKeys and [b]should[/b] be fully localized
+[*]The updated shard group names use existing LocKeys and [b]should[/b] be fully localized
+[*]The Fast Buy/Sell button hints use a bit of a hack, but are confirmed to make sense in English and Russian
 [/list]
 [line]
 
 [heading][color=#F3E600]Installation[/color][/heading]
 This mod requires the latest version of [url=https://www.nexusmods.com/cyberpunk2077/mods/1511]redscript[/url] to be installed.
 
-The zip files are set up to be installed automagically with Vortex or other mod managers, but if want to install it manually:
-[list]
-[*]Extract the zip file to your Cyberpunk 2077 installation folder
-[/list]
-You should end up with a [b][color=#04DAF6]flib[/color][/b] folder in the [b][color=#04DAF6]Cyberpunk 2077\r6\scripts\[/color][/b] directory
+To install, simply extract the zip file to your Cyberpunk 2077 installation folder. You should end up with a [b][color=#04DAF6]flib[/color][/b] folder in the [b][color=#04DAF6]Cyberpunk 2077\r6\scripts\[/color][/b] directory
 
 [heading][color=#F3E600]Uninstallation[/color][/heading]
 [list]
@@ -69,5 +75,4 @@ This mod is incompatible with a few other mods due to them overriding the same m
 [/list]
 
 [heading][color=#F3E600]For Other Redscript Developers[/color][/heading]
-A listing of added, replaced and wrapped methods is available on the [url=https://github.com/flibX0r/cyberpunk-mods/tree/main/UI-Improvements]github repo[/url] along with all the source code and my current todo list.
-
+A listing of added, wrapped and replaced methods is available on the [url=https://github.com/flibX0r/cyberpunk-mods/tree/main/UI-Improvements]github repo[/url] along with all the source code and my current todo list.

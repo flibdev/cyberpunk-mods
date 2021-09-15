@@ -21,13 +21,14 @@ My collection of quality-of-life UI improvements
 
 ### Redscript compiler additions:
 
+- [X] Add character escape sequences
+- [X] Add `abstract` and `final` keyword support
 - [ ] Add support for hex literals
 - [ ] Add support for `enum == enum` conditional
 - [ ] Add `struct` support (more complex than just a class flag)
-- [ ] Add attribute for appending to methods instead of replacing them
-- [ ] Add support for casting `array<ref<*>>` to `array<Variant>` (if possible, might have to be `script_ref<*>`)
 - [ ] Add support for C-style `for`-loops (as syntactic sugar since that's how CDPR's compiler does them)
-- [ ] Add support for closures, or at least pseudo-anonymous inline functions (as syntatic sugar)
+- [ ] Finish redscript mkdocs generator
+- [ ] Write more language documentation for the wiki
 
 ------
 

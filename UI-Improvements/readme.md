@@ -9,18 +9,32 @@ A collection of quality-of-life UI improvements to fix minor issues that annoyed
 ### Crafting
 - Ammo crafting is limited to the maximum carryable per type
 
-### Journal
-- Sort Jobs dynamically by timestamp/name/difficulty
-- Sort Messages dynamically by timestamp/name
-- Sort Shards dynamically by timestamp/name
-
 ### Dialer Menu
 - Sorting by either name or timestamp (install time choice)
 - Always shows contacts that are Quest Related or have unread messages first
 
+### Journal
+- Vehicle quests now have a codex image link to the vehicle being purchased
+- Sort Jobs dynamically by timestamp/name/difficulty
+- Sort Messages dynamically by timestamp/name
+- Sort Shards dynamically by timestamp/name
+
+### Shards
+- Added localized names for the 4 "Other" groups CDPR added
+- Fixed the name of the Encrypted shards group
+
 ### Vendors:
+- Fast Buy & Sell
+  - Allows you to buy and sell entire items stacks without any additional dialogs
+  - Uses the `activate_secondary` keybinding (defaults to Right Mouse Button)
+- Quantity pickers are now limited to the players/vendors total money
 - Iconic Items cannot be sold
 - Ripperdoc vendor screen only shows number of unowned mods per body category
+
+## Localization Support
+- The button hint text used by the Journal sorting methods uses existing LocKeys and _should_ be fully localized
+- The updated shard group names use existing LocKeys and _should_ be fully localized
+- The Fast Buy/Sell button hints use a bit of a hack, but are confirmed to make sense in English and Russian
 
 ## TODO
 - [X] Limit ammo crafting to type limit
@@ -29,13 +43,11 @@ A collection of quality-of-life UI improvements to fix minor issues that annoyed
   - [X] Steal sorting widget from other controllers
 - [ ] Fix displayed cost of installing owned cyberware in Vendor screen
 - [ ] Show scope type in tooltip
-- Looks like that information is stored in the TweakDB
 - [ ] Add search filter to shards/messages
 - [X] Add vehicle thumbnail images to vehicle quests (PR #1 by djkovrik)
   - [ ] Find non-hardcoded mapping between quests and images
-  - Doesn't seem to exist, could be patched in to quest archive data
 - [X] Fixing LMG weapon mods
-- [ ] Add configuration tool (CET-based?)
+- [ ] Add configuration tool
 - [ ] Add tagging of favourite items to prevent them being sold or disassembled
 
 ## Compatability
@@ -72,16 +84,32 @@ class CraftingSystem {
   // Added methods
   protected func flibGetAmmoCraftingMaximum(itemRecord: wref<Item_Record>) -> Int32
   protected func flibGetAmmoCraftingMaximum(itemData: wref<gameItemData>) -> Int32
-  // Replaced methods
+  // Wrapped methods
   public final const func GetMaxCraftingAmount(itemData: wref<gameItemData>) -> Int32
+  public final const func CanItemBeDisassembled(itemData: wref<gameItemData>) -> Bool
+  // Replaced methods
   public final const func CanItemBeCrafted(itemData: wref<gameItemData>) -> Bool
   public final const func CanItemBeCrafted(itemRecord: wref<Item_Record>) -> Bool
-  public final const func CanItemBeDisassembled(itemData: wref<gameItemData>) -> Bool
 }
 
 class DialerContactDataView {
   // Replaced method
   public func SortItem(left: ref<IScriptable>, right: ref<IScriptable>) -> Bool
+}
+
+class FullscreenVendorGameController {
+  // Added fields
+  protected let fFastBuyText: String;
+  protected let fFastSellText: String;
+  // Added method
+  private func flibGetMaxQuantity(itemData: InventoryItemData, actionType: QuantityPickerActionType) -> Int32
+  // Wrapped methods
+  private final func Init() -> Void
+  protected cb func OnInventoryItemHoverOver(evt: ref<ItemDisplayHoverOverEvent>) -> Bool
+  protected cb func OnInventoryItemHoverOut(evt: ref<ItemDisplayHoverOutEvent>) -> Bool
+  private final func HandleVendorSlotInput(evt: ref<ItemDisplayClickEvent>, itemData: InventoryItemData) -> Void
+  // Replaced method
+  private final func OpenQuantityPicker(itemData: InventoryItemData, actionType: QuantityPickerActionType, opt isBuyback: Bool) -> Void
 }
 
 class JournalManager {
@@ -114,8 +142,10 @@ class MessengerUtils {
 }
 
 class QuestDetailsPanelController {
-  // Replace method
-  private final func SpawnMappinLink(mappinEntry: ref<JournalQuestMapPinBase>, jumpTo: Vector3) -> Void
+  // Added method
+  private func flibGetVehicleCodexEntry(questId: String) -> ref<JournalEntry>
+  // Wrapped method
+  private final func PopulateCodexLinks(trackedObjective: ref<JournalQuestObjective>) -> Void
 }
 
 class QuestListVirtualNestedDataView {
@@ -169,6 +199,8 @@ class ShardsMenuGameController {
   protected cb func OnUninitialize() -> Bool
   protected cb func OnPlayerAttach(playerPuppet: ref<GameObject>) -> Bool
   private final func RefreshButtonHints() -> Void
+  // Replaced methods
+  private final func PopulateData() -> Void
 }
 
 class ShardsNestedListDataView {
@@ -225,6 +257,4 @@ class flibSortingUtils {
   public static func GetSortOrderLocKey(order: flibSortOrder) -> CName
   public static func GetSortOrderButtonHint(order: flibSortOrder) -> String
 }
-
-public static func flib_GetVehicleIcon(questId: String) -> ref<UIIcon_Record>
 ```
