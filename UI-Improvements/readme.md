@@ -49,6 +49,8 @@ A collection of quality-of-life UI improvements to fix minor issues that annoyed
 - [X] Fixing LMG weapon mods
 - [ ] Add configuration tool
 - [ ] Add tagging of favourite items to prevent them being sold or disassembled
+- [ ] Add stack total value to vendor screens
+- [ ] Change vendor quantity dialog to default to max
 
 ## Compatability
 
