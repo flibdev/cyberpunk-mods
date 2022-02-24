@@ -9,7 +9,6 @@ public final func GetContactDataArray(includeUnknown: Bool) -> array<ref<IScript
   let entries: array<wref<JournalEntry>>;
   let i: Int32;
   let j: Int32;
-  let k: Int32;
   let lastMessegeRecived: wref<JournalPhoneMessage>;
   let lastMessegeSent: wref<JournalPhoneChoiceEntry>;
   let messagesReceived: array<wref<JournalEntry>>;
@@ -32,7 +31,7 @@ public final func GetContactDataArray(includeUnknown: Bool) -> array<ref<IScript
     while j < trackedChildEntriesCount {
       trackedChildEntry = trackedChildEntriesList[j] as JournalQuestCodexLink;
       if IsDefined(trackedChildEntry) {
-        ArrayPush(trackedChildEntriesHashList, Cast(trackedChildEntry.GetLinkPathHash()));
+        ArrayPush(trackedChildEntriesHashList, Cast<Int32>(trackedChildEntry.GetLinkPathHash()));
       };
       j = j + 1;
     };

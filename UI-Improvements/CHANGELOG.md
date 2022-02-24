@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.5.0] - 2022-02-24
+
+Support for Cyberpunk 2077 Patch 1.5
+
+### Added
+
+ - Item Quantity Pickers now default to their max value instead of 1
+
+### Changed
+
+ - Requires redscript 0.5 or newer
+ - Moved shared vendor code up to **shared** folder
+
+### Removed
+
+Removed because they were fixed by CDPR in Patch 1.5
+ - LMG mod slot fix
+ - Missing shard group names
+ - Vehicle quest preview images (albiet fixed poorly)
+
 ## [1.3.0] - 2021-09-02
 
 Support for Cyberpunk 2077 Patch 1.3

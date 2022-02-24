@@ -78,31 +78,3 @@ public final static func GetShardsDataArray(journal: ref<JournalManager>, active
   };
   return virtualDataList;
 }
-
-// Append the tag name to one of the 4 "Other" groups
-@wrapMethod(CodexUtils)
-private final static func GetLocalizedTag(tag: CName) -> String {
-  let str: String;
-
-  if IsNameValid(tag) {
-    switch tag {
-      case n"others":
-        str = GetLocalizedTextByKey(n"UI-Shards-Others");
-        break;
-      case n"poetry":
-        str = GetLocalizedTextByKey(n"UI-Shards-Poetry");
-        break;
-      case n"religion_philosophy":
-        str = GetLocalizedTextByKey(n"UI-Shards-ReligionPhilosophy");
-        break;
-      default:
-        str = wrappedMethod(tag);
-    }
-  }
-  else {
-    // LocKey#53720 = Miscellaneous
-    str = GetLocalizedText("LocKey#53720");
-  }
-
-  return str;
-}
