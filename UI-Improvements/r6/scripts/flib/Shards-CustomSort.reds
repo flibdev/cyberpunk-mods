@@ -131,8 +131,8 @@ protected cb func flibOnPostOnRelease(evt: ref<inkPointerEvent>) -> Bool {
 
 @replaceMethod(ShardsMenuGameController)
 private final func PopulateData() -> Void {
-  let groupData: ref<ShardEntryData>;
-  let groupVirtualListData: ref<VirutalNestedListData>;
+  let encryptedGroup: ref<ShardEntryData>;
+  let encryptedList: ref<VirutalNestedListData>;
   let newEntries: array<Int32>;
   let items: array<InventoryItemData>;
   let data: array<ref<VirutalNestedListData>>;
@@ -154,29 +154,29 @@ private final func PopulateData() -> Void {
   }
 
   if counter > 0 {
-    groupData = new ShardEntryData();
-    groupData.m_title = "[" + GetLocalizedTextByKey(n"Story-base-journal-codex-tutorials-Endryptedshards_title") + "]";
-    groupData.m_activeDataSync = this.m_activeData;
-    groupData.m_counter = counter;
-    groupData.m_isNew = this.m_hasNewCryptedEntries;
-    groupData.f_group = null;
-    groupData.m_newEntries = newEntries;
-    groupVirtualListData = new VirutalNestedListData();
-    groupVirtualListData.m_level = level;
-    groupVirtualListData.m_widgetType = 1u;
-    groupVirtualListData.m_isHeader = true;
-    groupVirtualListData.m_data = groupData;
+    encryptedGroup = new ShardEntryData();
+    encryptedGroup.m_title = "[" + GetLocalizedTextByKey(n"Story-base-journal-codex-tutorials-Endryptedshards_title") + "]";
+    encryptedGroup.m_activeDataSync = this.m_activeData;
+    encryptedGroup.m_counter = counter;
+    encryptedGroup.m_isNew = this.m_hasNewCryptedEntries;
+    encryptedGroup.f_group = null;
+    encryptedGroup.m_newEntries = newEntries;
+    encryptedList = new VirutalNestedListData();
+    encryptedList.m_level = level;
+    encryptedList.m_widgetType = 1u;
+    encryptedList.m_isHeader = true;
+    encryptedList.m_data = encryptedGroup;
 
     for shardListData in data {
       if !shardListData.m_isHeader {
         let shard = shardListData.m_data as ShardEntryData;
         if IsDefined(shard) && shard.m_isCrypted {
-          shard.f_group = groupData;
+          shard.f_group = encryptedGroup;
         }
       }
     }
 
-    ArrayPush(data, groupVirtualListData);
+    ArrayPush(data, encryptedList);
   }
 
   if ArraySize(data) > 0 {

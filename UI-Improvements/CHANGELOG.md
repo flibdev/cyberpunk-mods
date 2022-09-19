@@ -1,5 +1,33 @@
 # Changelog
 
+## [1.6.0] - 2022-09-14
+
+Support for Cyberpunk 2077 Patch 1.6
+
+### Changed
+
+Updated Vendor Fast Sell to work with the new vendor logic
+ - Now supports buyback logic, no money loss going back and forth
+ - No fast selling of iconic items
+
+### Removed
+
+Removed iconic item sale prevention, CDPR added confirmation dialog
+
+Removed because they were fixed by CDPR:
+ - Max ammo crafting
+ - Vendor quantity picker limits
+
+### Unchanged
+
+ - Dialer Menu ordering *(CDPR impl still sorts by hash)*
+ - Iconic Items - Disassembly prevented
+ - Quantity Picker - Default to max
+ - RipperDoc - Only show unowned in UI totals
+ - Messages/Quests/Shards custom sorting *(CDPR impl still sorts by hash)*
+
+---
+
 ## [1.5.0] - 2022-02-24
 
 Support for Cyberpunk 2077 Patch 1.5
@@ -19,6 +47,8 @@ Removed because they were fixed by CDPR in Patch 1.5
  - LMG mod slot fix
  - Missing shard group names
  - Vehicle quest preview images (albiet fixed poorly)
+
+---
 
 ## [1.3.0] - 2021-09-02
 

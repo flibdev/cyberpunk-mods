@@ -26,17 +26,19 @@ private final func Init() -> Void {
 
 @wrapMethod(FullscreenVendorGameController)
 protected cb func OnInventoryItemHoverOver(evt: ref<ItemDisplayHoverOverEvent>) -> Bool {
-  let targetItem: InventoryItemData = evt.itemData;
   let wrapped: Bool = wrappedMethod(evt);
-  let sellStackLocalizedText: String;
+  let controller = inkWidgetRef.GetController(this.m_sortingDropdown) as DropdownListController;
 
-  if !IsDefined(this.m_storageUserData) && IsDefined(this.m_vendorUserData) {
-    if InventoryItemData.IsVendorItem(targetItem) {
-      this.m_buttonHintsController.AddButtonHint(this.fFastButton, this.fFastBuyText);
-    }
-    else {
-      if this.m_VendorDataManager.CanPlayerSellItem(InventoryItemData.GetID(targetItem)) {
-        this.m_buttonHintsController.AddButtonHint(this.fFastButton, this.fFastSellText);
+  // Bugfix by CDPR: Ignore hover over event when the sorting dropdown is open
+  if !controller.IsOpened() {
+    if !IsDefined(this.m_storageUserData) && IsDefined(this.m_vendorUserData) {
+      if Equals(evt.displayContextData.GetDisplayContext(), ItemDisplayContext.Vendor) {
+        this.m_buttonHintsController.AddButtonHint(this.fFastButton, this.fFastBuyText);
+      }
+      else {
+        if this.m_VendorDataManager.CanPlayerSellItem(evt.uiInventoryItem.GetID()) && !evt.uiInventoryItem.IsIconic() {
+          this.m_buttonHintsController.AddButtonHint(this.fFastButton, this.fFastSellText);
+        }
       }
     }
   }
@@ -51,23 +53,68 @@ protected cb func OnInventoryItemHoverOut(evt: ref<ItemDisplayHoverOutEvent>) ->
 }
 
 @wrapMethod(FullscreenVendorGameController)
-private final func HandleVendorSlotInput(evt: ref<ItemDisplayClickEvent>, itemData: InventoryItemData) -> Void {
-  wrappedMethod(evt, itemData);
+private final func HandleVendorSlotInput(evt: ref<ItemDisplayClickEvent>) -> Void {
+  let targetItem: wref<UIInventoryItem> = evt.uiInventoryItem;
+  let vendorNotification: ref<UIMenuNotificationEvent>;
 
-  if evt.actionName.IsAction(this.fFastButton) {
-    let maxQty: Int32;
+  wrappedMethod(evt);
 
-    if (InventoryItemData.IsVendorItem(itemData)) {
-      maxQty = this.flibGetMaxQuantity(itemData, QuantityPickerActionType.Buy);
-      this.BuyItem(InventoryItemData.GetGameItemData(itemData), maxQty);
-      this.PlaySound(n"Item", n"OnBuy");
+  if evt.actionName.IsAction(this.fFastButton) && IsDefined(targetItem) {
+    let maxQty: Int32 = 0;
+
+    switch evt.displayContextData.GetDisplayContext() {
+      case ItemDisplayContext.Vendor:
+        maxQty = this.flibGetMaxPurchasable(targetItem, QuantityPickerActionType.Buy);
+        // CDPR new logic for ammo limits
+        if (maxQty == 0) {
+          vendorNotification = new UIMenuNotificationEvent();
+          vendorNotification.m_notificationType = UIMenuNotificationType.CraftingAmmoCap;
+          GameInstance.GetUISystem(this.m_player.GetGame()).QueueEvent(vendorNotification);
+          this.PlaySound(n"MapPin", n"OnDelete");
+        }
+        else {
+          this.BuyItem(targetItem.GetItemData(), maxQty, evt.isBuybackStack);
+          this.PlaySound(n"Item", n"OnBuy");
+          this.m_TooltipsManager.HideTooltips();
+        }
+        break;
+      case ItemDisplayContext.VendorPlayer:
+        // Don't fast sell iconics
+        if targetItem.IsIconic() {
+          this.OpenConfirmationPopup(targetItem, targetItem.GetQuantity(), QuantityPickerActionType.Sell);
+        }
+        else {
+          maxQty = this.flibGetMaxPurchasable(targetItem, QuantityPickerActionType.Sell);
+          this.SellItem(targetItem.GetItemData(), maxQty);
+          this.PlaySound(n"Item", n"OnSell");
+        }
+        break;
+      default:
+        break;
     }
-    else {
-      maxQty = this.flibGetMaxQuantity(itemData, QuantityPickerActionType.Sell);
-      this.SellItem(InventoryItemData.GetGameItemData(itemData), maxQty);
-      this.PlaySound(n"Item", n"OnSell");
-    }
-
-    this.m_TooltipsManager.HideTooltips();
   }
+}
+
+@addMethod(FullscreenVendorGameController)
+private func flibGetMaxPurchasable(item: wref<UIInventoryItem>, actionType: QuantityPickerActionType) -> Int32 {
+  let price: Int32 = this.GetPrice(item.GetItemData(), actionType, 1);
+  let maxQty: Int32 = this.GetMaxQuantity(item, Equals(actionType, QuantityPickerActionType.Sell));
+  let money: Int32 = 0;
+
+  if (price <= 0) {
+    return maxQty;
+  }
+
+  switch (actionType) {
+    case QuantityPickerActionType.Sell:
+      money = MarketSystem.GetVendorMoney(this.m_VendorDataManager.GetVendorInstance());
+      break;
+    case QuantityPickerActionType.Buy:
+      money = this.m_VendorDataManager.GetLocalPlayerCurrencyAmount();
+      break;
+    default:
+      return maxQty;
+  }
+
+  return Min(maxQty, money / price);
 }
