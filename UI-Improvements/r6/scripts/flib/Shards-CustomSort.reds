@@ -29,7 +29,7 @@ protected func SortItems(compareBuilder: ref<CompareBuilder>, left: ref<VirutalN
       case flibSortOrder.Timestamp:
         compareBuilder
           .BoolTrue(leftData.m_isNew, rightData.m_isNew)
-          .GameTimeDesc(leftData.m_timeStamp, leftData.m_timeStamp);
+          .GameTimeDesc(leftData.m_timeStamp, rightData.m_timeStamp);
         break;
       case flibSortOrder.Name:
         compareBuilder
