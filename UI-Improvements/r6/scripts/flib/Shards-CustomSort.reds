@@ -62,6 +62,9 @@ public static func flibGetShardGroupFromListData(listData: ref<VirutalNestedList
 /// @section ShardsMenuGameController
 
 @addField(ShardsMenuGameController)
+private let f_sortEvent: CName;
+
+@addField(ShardsMenuGameController)
 private let f_sortOrder: flibSortOrder;
 
 @addField(ShardsMenuGameController)
@@ -84,11 +87,12 @@ protected cb func OnUninitialize() -> Bool {
 
 @wrapMethod(ShardsMenuGameController)
 protected cb func OnPlayerAttach(playerPuppet: ref<GameObject>) -> Bool {
+  this.f_sortEvent = flibSettings.Get(playerPuppet.GetGame()).GetSortingEventName();
   this.f_uiScriptableSystem = UIScriptableSystem.GetInstance(playerPuppet.GetGame());
   this.f_sortOrder = IntEnum(this.f_uiScriptableSystem.flibGetShardsSorting());
   this.m_listController.flibSetSortOrder(this.f_sortOrder);
   this.m_buttonHintsController.AddButtonHint(
-    flibSortingUtils.GetButtonEventName(),
+    this.f_sortEvent,
     flibSortingUtils.GetSortOrderButtonHint(this.f_sortOrder)
   );
 
@@ -100,14 +104,14 @@ private final func RefreshButtonHints() -> Void {
   wrappedMethod();
 
   this.m_buttonHintsController.AddButtonHint(
-    flibSortingUtils.GetButtonEventName(),
+    this.f_sortEvent,
     flibSortingUtils.GetSortOrderButtonHint(this.f_sortOrder)
   );
 }
 
 @addMethod(ShardsMenuGameController)
 protected cb func flibOnPostOnRelease(evt: ref<inkPointerEvent>) -> Bool {
-  if evt.IsAction(flibSortingUtils.GetButtonEventName()) {
+  if evt.IsAction(this.f_sortEvent) {
     // Cycle to next valid sort order
     switch this.f_sortOrder {
       case flibSortOrder.Timestamp:

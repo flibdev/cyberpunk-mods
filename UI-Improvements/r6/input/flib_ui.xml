@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<bindings>
+    <!-- inputContexts -->
+    <context name="flibUI">
+        <action name="ToggleSorting" map="ToggleSorting_Button" />
+    </context>
+
+    <context name="UIMenu" append="true">
+        <include name="flibUI" />
+    </context>
+
+    <acceptedEvents action="ToggleSorting">
+        <event name="BUTTON_RELEASED" />
+    </acceptedEvents>
+
+    <!-- inputUserMapping -->
+    <mapping name="ToggleSorting_Button" type="Button">
+        <!-- Change these values to change the key binding -->
+		<button id="IK_Pad_LeftThumb" />
+		<button id="IK_L" />
+	</mapping>
+
+</bindings>
