@@ -1,0 +1,67 @@
+{
+  "Header": {
+    "WolvenKitVersion": "8.8.1",
+    "WKitJsonVersion": "0.0.3",
+    "GameVersion": 1610,
+    "ExportedDateTime": "2023-02-12T10:13:17.3176376Z",
+    "DataType": "CR2W",
+    "ArchiveFileName": "C:\\Github\\flib\\cyberpunk-mods\\UI-Improvements\\wolvenkit\\source\\archive\\ui_improvements.json"
+  },
+  "Data": {
+    "Version": 195,
+    "BuildVersion": 0,
+    "RootChunk": {
+      "$type": "JsonResource",
+      "cookingPlatform": "PLATFORM_PC",
+      "root": {
+        "HandleId": "0",
+        "Data": {
+          "$type": "localizationPersistenceOnScreenEntries",
+          "entries": [
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Action-Allow",
+              "femaleVariant": "Allow"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Action-Confirm",
+              "femaleVariant": "Show Confirmation Dialog"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Action-Prevent",
+              "femaleVariant": "Prevent"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Category-Iconic",
+              "femaleVariant": "Iconic Items"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Iconic-Disassembly",
+              "femaleVariant": "Allow Disassembly"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Iconic-Sale",
+              "femaleVariant": "Allow Sale"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Category-Sorting",
+              "femaleVariant": "Custom Sorting"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Sorting-UseInputLoader",
+              "femaleVariant": "Use InputLoader Key Binding"
+            }
+          ]
+        }
+      }
+    },
+    "EmbeddedFiles": []
+  }
+}
