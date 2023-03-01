@@ -69,6 +69,8 @@ private let f_uiScriptableSystem: wref<UIScriptableSystem>;
 protected cb func OnInitialize() -> Bool {
   wrappedMethod();
 
+  let container = GameInstance.GetScriptableSystemsContainer(gameInstance);
+
   this.m_buttonHintsController.AddButtonHint(
     flibSortingUtils.GetButtonEventName(),
     flibSortingUtils.GetSortOrderButtonHint(this.f_sortOrder)

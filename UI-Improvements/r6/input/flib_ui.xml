@@ -1,8 +1,10 @@
 <?xml version="1.0"?>
 <bindings>
     <!-- inputContexts -->
+    
     <context name="flibUI">
         <action name="ToggleSorting" map="ToggleSorting_Button" />
+        <action name="FastBuySell" map="FastBuySell_Button" />
     </context>
 
     <context name="UIMenu" append="true">
@@ -13,11 +15,22 @@
         <event name="BUTTON_RELEASED" />
     </acceptedEvents>
 
+    <acceptedEvents action="FastBuySell">
+        <event name="BUTTON_RELEASED" />
+    </acceptedEvents>
+
     <!-- inputUserMapping -->
+    
     <mapping name="ToggleSorting_Button" type="Button">
         <!-- Change these values to change the key binding -->
 		<button id="IK_Pad_LeftThumb" />
 		<button id="IK_L" />
+	</mapping>
+
+    <mapping name="FastBuySell_Button" type="Button">
+        <!-- Change these values to change the key binding -->
+		<button id="IK_Pad_Y_TRIANGLE" />
+        <button id="IK_RightMouse" />		
 	</mapping>
 
 </bindings>

@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.0.0] - 2023-02-16
+
+Complete rewrite to support Mod Settings, proper localization and better
+compatibility with other mods.
+
+### Added
+
+ - Added ArchiveXL as a required dependency for localization support
+ - Added optional support for Mod Settings
+ - Added optional support for Input Loader key bindings
+
+### Changed
+
+ - Fixed typo bug with Shard sorting by Timestamp
+
 ## [1.6.0] - 2022-09-14
 
 Support for Cyberpunk 2077 Patch 1.6

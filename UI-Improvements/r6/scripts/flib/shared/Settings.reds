@@ -1,16 +1,17 @@
 
 enum ActionSetting {
-    Allow = 0,
-    Confirm = 1,
-    Prevent = 2
+    Confirm = 0,
+    Prevent = 1
 }
 
 public class flibSettings extends ScriptableSystem {
 
+    // -------------------------------------------------------------------------
+    // Iconic Items
+
     @runtimeProperty("ModSettings.mod", "flib's UI Improvements")
     @runtimeProperty("ModSettings.category", "flib-Settings-Category-Iconic")
     @runtimeProperty("ModSettings.displayName", "flib-Settings-Iconic-Disassembly")
-    @runtimeProperty("ModSettings.displayValues.Allow", "flib-Settings-Action-Allow")
     @runtimeProperty("ModSettings.displayValues.Confirm", "flib-Settings-Action-Confirm")
     @runtimeProperty("ModSettings.displayValues.Prevent", "flib-Settings-Action-Prevent")
     public let IconicDisassembly: ActionSetting = ActionSetting.Confirm;
@@ -18,16 +19,25 @@ public class flibSettings extends ScriptableSystem {
     @runtimeProperty("ModSettings.mod", "flib's UI Improvements")
     @runtimeProperty("ModSettings.category", "flib-Settings-Category-Iconic")
     @runtimeProperty("ModSettings.displayName", "flib-Settings-Iconic-Sale")
-    @runtimeProperty("ModSettings.displayValues.Allow", "flib-Settings-Action-Allow")
     @runtimeProperty("ModSettings.displayValues.Confirm", "flib-Settings-Action-Confirm")
     @runtimeProperty("ModSettings.displayValues.Prevent", "flib-Settings-Action-Prevent")
     public let IconicSale: ActionSetting = ActionSetting.Confirm;
 
     // -------------------------------------------------------------------------
+    // Minor Fixes
 
     @runtimeProperty("ModSettings.mod", "flib's UI Improvements")
-    @runtimeProperty("ModSettings.category", "flib-Settings-Category-Sorting")
-    @runtimeProperty("ModSettings.displayName", "flib-Settings-Sorting-UseInputLoader")
+    @runtimeProperty("ModSettings.category", "flib-Settings-Category-Fixes")
+    @runtimeProperty("ModSettings.displayName", "flib-Settings-Fixes-ExcludeOwnedMods")
+    @runtimeProperty("ModSettings.description", "flib-Settings-Fixes-ExcludeOwnedMods-Desc")
+    public let ExcludeOwnedMods: Bool = true;
+
+    // -------------------------------------------------------------------------
+    // Mod Support
+
+    @runtimeProperty("ModSettings.mod", "flib's UI Improvements")
+    @runtimeProperty("ModSettings.category", "flib-Settings-Category-Mods")
+    @runtimeProperty("ModSettings.displayName", "flib-Settings-Mods-UseInputLoader")
     public let UseInputLoader: Bool = false;
 
 
@@ -47,9 +57,14 @@ public class flibSettings extends ScriptableSystem {
     public func GetSortingEventName() -> CName {
         return this.UseInputLoader ? n"ToggleSorting" : n"toggle_comparison_tooltip";
     }
+
+    public func GetFastBuyEventname() -> CName {
+        return this.UseInputLoader ? n"FastBuySell" : n"activate_secondary";
+    }
 }
 
-// ModSettings listener registration helper
+
+// ModSettings listener helper
 @if(ModuleExists("ModSettingsModule")) 
 public func flibRegisterListener(listener: ref<IScriptable>) {
   ModSettings.RegisterListenerToClass(listener);
@@ -57,11 +72,3 @@ public func flibRegisterListener(listener: ref<IScriptable>) {
 
 @if(!ModuleExists("ModSettingsModule")) 
 public func flibRegisterListener(listener: ref<IScriptable>) { }
-
-public exec func flibTest(gi: GameInstance) -> Void {
-    LogChannel(n"DEBUG", "flibTest()");
-    let settings = flibSettings.Get(gi);
-
-    LogChannel(n"DEBUG", "UseInputLoader = " + (settings.UseInputLoader ? "True" : "False"));
-    LogChannel(n"DEBUG", "GetSortingEventName() = " + NameToString(settings.GetSortingEventName()));
-}

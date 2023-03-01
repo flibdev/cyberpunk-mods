@@ -3,25 +3,12 @@
 @addField(FullscreenVendorGameController)
 protected let fFastButton: CName;
 
-@addField(FullscreenVendorGameController)
-protected let fFastBuyText: String;
-
-@addField(FullscreenVendorGameController)
-protected let fFastSellText: String;
-
 @wrapMethod(FullscreenVendorGameController)
 private final func Init() -> Void {
   wrappedMethod();
 
-  this.fFastButton = n"activate_secondary";
-
-  // This word split works in English and Russian, unsure about other languages
-  // LocKey#40340 = Fast Attack
-  let fastText = StrBeforeFirst(GetLocalizedText("LocKey#40340"), " ");
-  // LocKey#17847 = Buy
-  this.fFastBuyText = fastText + " " + GetLocalizedText("LocKey#17847");
-  // LocKey#17848 = Sell
-  this.fFastSellText = fastText + " " + GetLocalizedText("LocKey#17848");
+  let fSettings = flibSettings.Get(this.m_player.GetGame());
+  this.fFastButton = fSettings.GetFastBuyEventname();
 }
 
 @wrapMethod(FullscreenVendorGameController)
@@ -33,11 +20,11 @@ protected cb func OnInventoryItemHoverOver(evt: ref<ItemDisplayHoverOverEvent>) 
   if !controller.IsOpened() {
     if !IsDefined(this.m_storageUserData) && IsDefined(this.m_vendorUserData) {
       if Equals(evt.displayContextData.GetDisplayContext(), ItemDisplayContext.Vendor) {
-        this.m_buttonHintsController.AddButtonHint(this.fFastButton, this.fFastBuyText);
+        this.m_buttonHintsController.AddButtonHint(this.fFastButton, "flib-Vendor-FastBuy");
       }
       else {
         if this.m_VendorDataManager.CanPlayerSellItem(evt.uiInventoryItem.GetID()) && !evt.uiInventoryItem.IsIconic() {
-          this.m_buttonHintsController.AddButtonHint(this.fFastButton, this.fFastSellText);
+          this.m_buttonHintsController.AddButtonHint(this.fFastButton, "flib-Vendor-FastSell");
         }
       }
     }

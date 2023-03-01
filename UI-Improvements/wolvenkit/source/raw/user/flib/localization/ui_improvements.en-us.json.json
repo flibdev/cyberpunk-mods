@@ -20,11 +20,6 @@
           "entries": [
             {
               "$type": "localizationPersistenceOnScreenEntry",
-              "secondaryKey": "flib-Settings-Action-Allow",
-              "femaleVariant": "Allow"
-            },
-            {
-              "$type": "localizationPersistenceOnScreenEntry",
               "secondaryKey": "flib-Settings-Action-Confirm",
               "femaleVariant": "Show Confirmation Dialog"
             },
@@ -50,13 +45,38 @@
             },
             {
               "$type": "localizationPersistenceOnScreenEntry",
-              "secondaryKey": "flib-Settings-Category-Sorting",
-              "femaleVariant": "Custom Sorting"
+              "secondaryKey": "flib-Settings-Category-Fixes",
+              "femaleVariant": "Minor Fixes"
             },
             {
               "$type": "localizationPersistenceOnScreenEntry",
-              "secondaryKey": "flib-Settings-Sorting-UseInputLoader",
-              "femaleVariant": "Use InputLoader Key Binding"
+              "secondaryKey": "flib-Settings-Fixes-ExcludeOwnedMods",
+              "femaleVariant": "RipperDoc: Exclude Owned Mods"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Fixes-ExcludeOwnedMods-Desc",
+              "femaleVariant": "Should player owned mods be excluded from the totals shown on the RipperDoc screen"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Category-Mods",
+              "femaleVariant": "Mod Support"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Mods-UseInputLoader",
+              "femaleVariant": "Use InputLoader Key Bindings"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Vendor-FastBuy",
+              "femaleVariant": "Fast Buy"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Vendor-FastSell",
+              "femaleVariant": "Fast Sell"
             }
           ]
         }
