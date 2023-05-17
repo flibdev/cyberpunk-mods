@@ -1,8 +1,3 @@
-/** @file VirtualNestedList
-
-Implementation of runtime custom sorting for classes than inherit from the VirtualNested* classes
-*/
-
 /** @section SortItem() Logic
 
 The logic used in the `VirtualNestedListDataView.SortItem()` method is as follows:
@@ -15,14 +10,6 @@ The logic used in the `VirtualNestedListDataView.SortItem()` method is as follow
 subitems, especially when opening and closing the parent contact widget. If `PreSortItems()` is used
 correctly and keeps groups together, then `SortItems()` can be used to sort the content items within
 a group on their own.
-
-None of this complex logic would be required if groups and their contents were stored in actual data
-structures, with group objects containing a list of content items
-
-!!! warning Learn from my pain
-    Having taken a deep dive into the "logic" and implementation of these poorly named classes,
-    I have developed a deep hatred for whatever excuse for a developer birthed these horrors into
-    the world and forced them upon their co-workers.
 */
 
 /// @section VirtualNestedListDataView

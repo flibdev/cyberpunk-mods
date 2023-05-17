@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.0.0] - 2023-02-16
+## [2.0.0] - 2023-XX-XX
 
 Complete rewrite to support Mod Settings, proper localization and better
 compatibility with other mods.

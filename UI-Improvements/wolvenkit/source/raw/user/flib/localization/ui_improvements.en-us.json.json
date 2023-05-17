@@ -20,14 +20,126 @@
           "entries": [
             {
               "$type": "localizationPersistenceOnScreenEntry",
-              "secondaryKey": "flib-Settings-Action-Confirm",
+              "secondaryKey": "flib-Enum-QtyDefault-Min",
+              "femaleVariant": "Minimum (1)"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Enum-QtyDefault-Mid",
+              "femaleVariant": "Middle (50%)"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Enum-QtyDefault-Max",
+              "femaleVariant": "Maximum"
+            },
+
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Enum-Iconic-Allow",
+              "femaleVariant": "Allow"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Enum-Iconic-Confirm",
               "femaleVariant": "Show Confirmation Dialog"
             },
             {
               "$type": "localizationPersistenceOnScreenEntry",
-              "secondaryKey": "flib-Settings-Action-Prevent",
+              "secondaryKey": "flib-Enum-Iconic-Prevent",
               "femaleVariant": "Prevent"
             },
+
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Enum-Group-Expand",
+              "femaleVariant": "Expanded"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Enum-Group-Unread",
+              "femaleVariant": "Expand If Unread"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Enum-Group-Collapse",
+              "femaleVariant": "Collapsed"
+            },
+
+
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Category-Features",
+              "femaleVariant": "Features"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Feat-FastBuySell",
+              "femaleVariant": "Fast Buy/Sell"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Feat-FastBuySell-Desc",
+              "femaleVariant": "Fast Buy/Sell allows you to buy and sell entire item stacks with one click"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Feat-QtyPickerDefault",
+              "femaleVariant": "Quantity Picker Default"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Feat-QtyPickerDefault-Desc",
+              "femaleVariant": "What percentage should the quantity picker dialogs default to?"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Feat-ExcludeOwnedMods",
+              "femaleVariant": "RipperDoc: Exclude Owned Mods"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Feat-ExcludeOwnedMods-Desc",
+              "femaleVariant": "Should player-owned mods be excluded from the totals shown on the RipperDoc screen"
+            },
+
+
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Category-Groups",
+              "femaleVariant": "Journal Group Default Expansion"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Groups-Messages",
+              "femaleVariant": "Contact Messages"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Groups-Messages-Desc",
+              "femaleVariant": "How should contact messages appear by default"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Groups-Shards",
+              "femaleVariant": "Shard Groups"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Groups-Shards-Desc",
+              "femaleVariant": "How should shard groups appear by default"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Groups-Codex",
+              "femaleVariant": "Codex Groups"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Groups-Codex-Desc",
+              "femaleVariant": "How should codex groups appear by default"
+            },
+
             {
               "$type": "localizationPersistenceOnScreenEntry",
               "secondaryKey": "flib-Settings-Category-Iconic",
@@ -40,24 +152,31 @@
             },
             {
               "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Iconic-Disassembly-Desc",
+              "femaleVariant": "Allow the disassembly of iconic items?"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
               "secondaryKey": "flib-Settings-Iconic-Sale",
               "femaleVariant": "Allow Sale"
             },
             {
               "$type": "localizationPersistenceOnScreenEntry",
-              "secondaryKey": "flib-Settings-Category-Fixes",
-              "femaleVariant": "Minor Fixes"
+              "secondaryKey": "flib-Settings-Iconic-Sale-Desc",
+              "femaleVariant": "Allow the sale of iconic items?"
             },
             {
               "$type": "localizationPersistenceOnScreenEntry",
-              "secondaryKey": "flib-Settings-Fixes-ExcludeOwnedMods",
-              "femaleVariant": "RipperDoc: Exclude Owned Mods"
+              "secondaryKey": "flib-Settings-Iconic-FastSale",
+              "femaleVariant": "Allow Fast Sale"
             },
             {
               "$type": "localizationPersistenceOnScreenEntry",
-              "secondaryKey": "flib-Settings-Fixes-ExcludeOwnedMods-Desc",
-              "femaleVariant": "Should player owned mods be excluded from the totals shown on the RipperDoc screen"
+              "secondaryKey": "flib-Settings-Iconic-FastSale-Desc",
+              "femaleVariant": "Allow selling iconic items with the Fast Sell option?"
             },
+
+
             {
               "$type": "localizationPersistenceOnScreenEntry",
               "secondaryKey": "flib-Settings-Category-Mods",
@@ -70,6 +189,33 @@
             },
             {
               "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Mods-UseInputLoader-Desc",
+              "femaleVariant": "Use custom InputLoader key bindings instead of reusing existing bindings"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Mods-VirtualAtelier",
+              "femaleVariant": "Virtual Atelier"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Mods-VirtualAtelier-Desc",
+              "femaleVariant": "Enable compatibility fixes for the Virtual Atelier mod"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Mods-MissingPersons",
+              "femaleVariant": "Missing Persons - Fixer's Hidden Gems"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Settings-Mods-MissingPersons-Desc",
+              "femaleVariant": "Enable compatibility fixes for the Missing Persons mod"
+            },
+
+
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
               "secondaryKey": "flib-Vendor-FastBuy",
               "femaleVariant": "Fast Buy"
             },
@@ -77,6 +223,23 @@
               "$type": "localizationPersistenceOnScreenEntry",
               "secondaryKey": "flib-Vendor-FastSell",
               "femaleVariant": "Fast Sell"
+            },
+            
+            
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Sorting-Hint-Timestamp",
+              "femaleVariant": "Sorting: Most Recent"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Sorting-Hint-Name",
+              "femaleVariant": "Sorting: Name"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "secondaryKey": "flib-Sorting-Hint-Difficulty",
+              "femaleVariant": "Sorting: Difficulty"
             }
           ]
         }

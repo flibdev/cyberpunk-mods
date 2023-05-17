@@ -8,7 +8,7 @@ private final func Init() -> Void {
   wrappedMethod();
 
   let fSettings = flibSettings.Get(this.m_player.GetGame());
-  this.fFastButton = fSettings.GetFastBuyEventname();
+  this.fFastButton = fSettings.GetFastBuyEventName();
 }
 
 @wrapMethod(FullscreenVendorGameController)
@@ -18,14 +18,13 @@ protected cb func OnInventoryItemHoverOver(evt: ref<ItemDisplayHoverOverEvent>) 
 
   // Bugfix by CDPR: Ignore hover over event when the sorting dropdown is open
   if !controller.IsOpened() {
+    // Shared logic from existing vendor
     if !IsDefined(this.m_storageUserData) && IsDefined(this.m_vendorUserData) {
       if Equals(evt.displayContextData.GetDisplayContext(), ItemDisplayContext.Vendor) {
-        this.m_buttonHintsController.AddButtonHint(this.fFastButton, "flib-Vendor-FastBuy");
+        this.m_buttonHintsController.AddButtonHint(this.fFastButton, n"flib-Vendor-FastBuy");
       }
-      else {
-        if this.m_VendorDataManager.CanPlayerSellItem(evt.uiInventoryItem.GetID()) && !evt.uiInventoryItem.IsIconic() {
-          this.m_buttonHintsController.AddButtonHint(this.fFastButton, "flib-Vendor-FastSell");
-        }
+      else if this.m_VendorDataManager.CanPlayerSellItem(evt.uiInventoryItem.GetID()) && !evt.uiInventoryItem.IsIconic() {
+        this.m_buttonHintsController.AddButtonHint(this.fFastButton, n"flib-Vendor-FastSell");
       }
     }
   }
@@ -41,10 +40,9 @@ protected cb func OnInventoryItemHoverOut(evt: ref<ItemDisplayHoverOutEvent>) ->
 
 @wrapMethod(FullscreenVendorGameController)
 private final func HandleVendorSlotInput(evt: ref<ItemDisplayClickEvent>) -> Void {
-  let targetItem: wref<UIInventoryItem> = evt.uiInventoryItem;
-  let vendorNotification: ref<UIMenuNotificationEvent>;
-
   wrappedMethod(evt);
+
+  let targetItem = evt.uiInventoryItem;
 
   if evt.actionName.IsAction(this.fFastButton) && IsDefined(targetItem) {
     let maxQty: Int32 = 0;
@@ -54,7 +52,7 @@ private final func HandleVendorSlotInput(evt: ref<ItemDisplayClickEvent>) -> Voi
         maxQty = this.flibGetMaxPurchasable(targetItem, QuantityPickerActionType.Buy);
         // CDPR new logic for ammo limits
         if (maxQty == 0) {
-          vendorNotification = new UIMenuNotificationEvent();
+          let vendorNotification = new UIMenuNotificationEvent();
           vendorNotification.m_notificationType = UIMenuNotificationType.CraftingAmmoCap;
           GameInstance.GetUISystem(this.m_player.GetGame()).QueueEvent(vendorNotification);
           this.PlaySound(n"MapPin", n"OnDelete");

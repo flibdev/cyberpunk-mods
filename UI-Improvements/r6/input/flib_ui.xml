@@ -24,7 +24,7 @@
     <mapping name="ToggleSorting_Button" type="Button">
         <!-- Change these values to change the key binding -->
 		<button id="IK_Pad_LeftThumb" />
-		<button id="IK_L" />
+		<button id="IK_Tab" />
 	</mapping>
 
     <mapping name="FastBuySell_Button" type="Button">

@@ -1,4 +1,5 @@
 
+// Simple bugfix: CDPR were sorting by LocKey, not the actual localized name
 @replaceMethod(DialerContactDataView)
 public func SortItem(left: ref<IScriptable>, right: ref<IScriptable>) -> Bool {
   let leftData = (left as ContactData);
